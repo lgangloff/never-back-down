@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -36,9 +38,15 @@ public class WebConfigurer implements WebMvcConfigurer, ServletContextInitialize
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/app/**").addResourceLocations("classpath://app/");
+        registry.addResourceHandler("/*.bundle.js").addResourceLocations("classpath://app/");
 	}
     
-   
+	@Override
+    public void addViewControllers(ViewControllerRegistry registry ) {
+        registry.addViewController( "/" ).setViewName( "forward:/index.html" );
+        registry.addViewController( "/app/" ).setViewName( "forward:/app/index.html" );
+        registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
+    }
     
 
 }
