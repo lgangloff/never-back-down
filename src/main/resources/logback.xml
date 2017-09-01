@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.lgangloff.starter" level="${logback.app.loglevel}"/>
+    <logger name="org.lgangloff.nbd" level="${logback.app.loglevel}"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>

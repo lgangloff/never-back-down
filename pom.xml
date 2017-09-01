@@ -9,12 +9,12 @@
 		<version>2.0.0.M3</version>
 	</parent>
 
-	<groupId>org.lgangloff.starter</groupId>
-	<artifactId>spring-boot-angular2-starter</artifactId>
+	<groupId>org.lgangloff.nbd</groupId>
+	<artifactId>never-back-down</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Starter Springboot + Angular2</name>
+	<name>Never Back Down App</name>
 
 	<properties>
 		<joda-time-hibernate.version>1.4</joda-time-hibernate.version>
