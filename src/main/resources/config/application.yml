@@ -15,7 +15,7 @@ spring:
         active: local
     datasource:
         driverClassName: org.postgresql.Driver        
-        url: jdbc:postgresql://localhost:5432/database_name
+        url: jdbc:postgresql://localhost:5432/never-back-down
         username: postgres
         password: password
         test-on-borrow: true
