@@ -6,7 +6,7 @@ liquibase:
     contexts: prod
 
 logback:
-  loglevel: INFO
+  loglevel: DEBUG
   app.loglevel: DEBUG
   
 
