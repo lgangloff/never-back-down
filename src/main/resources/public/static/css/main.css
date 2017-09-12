@@ -1,25 +1,68 @@
 @import url(font-awesome.min.css);
 @import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400";
 
+body {
+    background-color: #ffffff;
+    color: #1B151B;
+}
+h1,h2, h3{
+    color: #887850;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+.footer-wrapper{
+    color: #887850;
+    background-color: #1B151B;
+    padding: 1em;
+}
+.footer-wrapper h2{
+    color: #ffffff;
+}
+
+#header{
+    font-weight: bold;
+}
+#nav {
+    color: #887850;
+    background-color: rgba(27, 21, 27, 0.90);
+}
+
+#nav.fixed {
+    background-color: rgba(27, 21, 27, 0.80);
+}
+#nav ul li{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#nav ul li a:focus{
+    color: #887850;
+    text-decoration: none;
+}
+
+#nav ul li a:hover:not(.active)  {
+    color: #ffffff;
+    background-color: rgba(222, 222, 222, 0.25);
+    text-decoration: none;
+}
+
+#nav ul li a.active {
+    background-color: #ffffff;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+
 #wrapper {
     margin: 0 auto;
-}
-.container h1{
-    margin: 30px 0 0;
-    text-align: center;
 }
 
 #header-wrapper{
     background: url(../images/background.jpg) no-repeat top center scroll;
     background-size: cover;
-    font-weight: bold;
-    color: black;
 }
-#header h1{
-    color: #887850;
-    text-transform: uppercase;
-    font-weight: bold;
-}
+
 #header{
     padding: 2em;
 }
@@ -47,9 +90,6 @@
     text-align: center;
     font-weight: bold;
 }
-.card *{
-    color: #57718A;
-}
 
 #footer{
     text-align: center;
@@ -60,14 +100,9 @@
     -webkit-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
     -ms-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
     transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
-    background-color: #ffffff;
-    color: #636363;
     margin: 0 auto;
     display: block;
     padding: 1em;
-    background-color: #f7f7f7;
-    border-top-left-radius: 0.25em;
-    border-top-right-radius: 0.25em;
     cursor: default;
     text-align: center;
     width: 100%;
@@ -102,10 +137,6 @@
     border-bottom-color: #dddddd;
 }
 
-#nav + #main {
-    padding-top: 4.25em;
-}
-
 #nav ul {
     margin: 0;
     padding: 0;
@@ -118,7 +149,7 @@
     -ms-transition: margin 0.2s ease;
     transition: margin 0.2s ease;
     display: inline-block;
-    margin: 0 0.35em;
+    margin: 0 0.10em;
     padding: 0;
     vertical-align: middle;
 }
@@ -137,20 +168,12 @@
     box-shadow: inset 0 0 0 1px transparent;
 }
 
-#nav ul li a:hover {
-    background-color: rgba(222, 222, 222, 0.25);
-}
 
-#nav ul li a.active {
-    background-color: #ffffff;
-    box-shadow: none;
-}
 
 #nav.fixed {
     position: fixed;
     top: 0;
     padding: 0.5em 1em;
-    background-color: rgba(247, 247, 247, 0.95);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     z-index: 10000;
