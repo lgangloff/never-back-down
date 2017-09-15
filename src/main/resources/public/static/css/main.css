@@ -5,7 +5,7 @@ body {
     background-color: #ffffff;
     color: #1B151B;
 }
-h1,h2, h3{
+h1,h2, h3, h4{
     color: #887850;
     text-transform: uppercase;
     font-weight: bold;
@@ -193,13 +193,19 @@ h1,h2, h3{
 @media screen and (max-width: 736px) {
 
     #nav {
-        /*display: none;*/
+        padding: 0.5em 1em;
     }
 
-    #nav + #coachs {
-        padding-top: 0;
+    
+    #nav.fixed ul li, #nav ul li {
+        margin: 0;
     }
 
+    #nav.fixed ul li a, #nav ul li a {
+        padding: 0 0.75em;
+        font-size: 0.9em;
+    }
+    
 }
 
 
@@ -258,4 +264,38 @@ ul.icons li:last-child {
     height: 2em;
     text-align: center;
     line-height: 2em;
+}
+
+
+.modal-header h4{
+    padding: 5px 20px;
+}
+.modal-body p{
+    padding: 0 20px;
+}
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    margin: auto;
+    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}
+
+
+#contact .card-block{
+    padding: 10px;
 }
