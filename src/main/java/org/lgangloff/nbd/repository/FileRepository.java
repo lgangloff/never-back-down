@@ -17,6 +17,9 @@ public interface FileRepository extends JpaRepository<File,Long> {
     @Query("select f from File f "
     		+ "where lower(f.name) like :query "
     		+ "or lower(f.contentType) like :query ")
-	Page<File> findAll(@Param("query") String query, Pageable pageable);    
+	Page<File> findAll(@Param("query") String query, Pageable pageable);
+
+    @Query("select f from File f FETCH ALL PROPERTIES where f.uuid = :uuid")
+	File findOneByUuidWithDatas(@Param("uuid") String uuid);    
 
 }

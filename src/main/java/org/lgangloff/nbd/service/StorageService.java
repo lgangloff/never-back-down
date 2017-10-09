@@ -29,6 +29,10 @@ public class StorageService {
 		
 		return fileRepository.saveAndFlush(file);
 	}
+	
+	public File findOneForDownload(String uuid) {
+		return fileRepository.findOneByUuidWithDatas(uuid);
+	}
 
 	public Page<File> findAll(String query, Pageable pageable) {
 		return fileRepository.findAll(query, pageable);

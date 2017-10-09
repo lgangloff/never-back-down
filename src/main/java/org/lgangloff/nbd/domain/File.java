@@ -3,6 +3,7 @@ package org.lgangloff.nbd.domain;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
@@ -39,7 +40,7 @@ public class File extends AbstractAuditingEntity {
 	
 	
 	@JsonIgnore
-	@Basic
+	@Basic(fetch=FetchType.LAZY)
 	private byte[] datas;
 
 	public Long getId() {
