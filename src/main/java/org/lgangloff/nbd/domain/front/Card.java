@@ -12,7 +12,7 @@ public class Card {
 	
 	public List<String> items = new ArrayList<>();
 	
-	public String linkHref, linkText ;
+	public Link link;
 
 	public Card(String name, String title, String text) {
 		super();
@@ -34,8 +34,7 @@ public class Card {
 	}
 
 	public void setLink(String href, String text) {
-		this.linkHref = href;
-		this.linkText = text;
+		this.link = new Link(href, text);
 	}
 
 }

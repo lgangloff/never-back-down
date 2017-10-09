@@ -9,7 +9,7 @@ public class Section {
 	public String name;
 	public String title;
 	
-	public List<Card> cards = new ArrayList<>();
+	public List<Row> rows = new ArrayList<>();
 
 	public Section( String name, String title) {
 		super();
@@ -17,8 +17,8 @@ public class Section {
 		this.title = title;
 	}
 
-	public void addCard(Card e) {
-		this.cards.add(e);
+	public void addRow(Row e) {
+		this.rows.add(e);
 	}
 
 }

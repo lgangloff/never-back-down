@@ -1,16 +1,27 @@
 package org.lgangloff.nbd.web;
 
-import org.lgangloff.nbd.domain.front.CardBlock;
+import org.lgangloff.nbd.domain.front.WebSite;
 import org.lgangloff.nbd.service.WebSiteBuilder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
 public class IndexController {
 
-	
-	public void index() {
+	@RequestMapping({"/", "/index.html"})
+	public String index(Model model) {
 		
-		WebSiteBuilder.newWebSite("never-back-down", "Never Back Down - Programme")
+		WebSite site = WebSiteBuilder.newWebSite("never-back-down", "Never Back Down - Program")
+				.withBackGroundImage("static/images/background.jpg")
+				.withLogoImage("static/images/logo-500.png", "static/images/logo-300.png")
+				.withSlogan("Une programmation d’entrainement élaborée par une équipe de\n" + 
+						"                        coach expérimentés et de sportifs de haut niveau à votre écoute\n" + 
+						"                        afin de vous permettre de passer vos limites.")
 			.addSection("coachs", "Coachs")
-				.addCard("benoit", "Benoit Jacquemin", "Head Coach Crossfit Nancy")
+				.row()
+				.addColEmpty("col-lg-2")
+				.addColCard("col-12 col-sm-6 col-lg-4", "benoit", "Benoit Jacquemin", "Head Coach Crossfit Nancy")
 					.withImgTop("static/images/benoit.jpg")
 					.addElement("CrossFit Level 2 Trainer (CF-L2)")
 					.addElement("Competitor Certificate (2017)")
@@ -19,24 +30,26 @@ public class IndexController {
 					.addElement("Scaling Certificate (2016)")
 					.addElement("Spot The Flaw Certificate (1)")
 					.addElement("bpjeps agff 2014")
-				.addCard("kevin", "Kevin Bouly", "Haltérophile français")
+				.addColCard("col-12 col-sm-6 col-lg-4", "kevin", "Kevin Bouly", "Haltérophile français")
 					.withImgTop("static/images/kevin.jpg")
 					.addElement("8 fois champion de France")
 					.addElement("Champion du Monde Masters")
 					.addElement("12ème Jeux Olympiques")
 			.addSection("programs", "Programs")
-				.addCard("free", "Free", "Programmation du jour")
-					.withFooterLink("#contact", "0€")
-					.addCard("self-performing", "Self Performing", "1 Month<br/>\n" + 
+				.row()
+				.addColEmpty("col-lg-1")
+				.addColCard("col-12 col-sm-4 col-lg-2", "free", "Free", "Programmation du jour")
+					.withFooterLink("0€", "#contact")
+					.addColCard("col-12 col-sm-4 col-lg-2", "self-performing", "Self Performing", "1 Month<br/>\n" + 
 							"                                        CYCLE<br/>\n" + 
 							"                                        5 Jours<br/>\n" + 
 							"                                        2 days<br/>\n" + 
 							"                                        Weightlifting<br/>\n" + 
 							"                                        Gym/Met-Con<br/>\n" + 
 							"                                        Accesory work")
-						.withFooterLink("#contact", "35€ / mois")
+						.withFooterLink("35€ / mois", "#contact")
 
-						.addCard("competitor", "Competitor", "\n" + 
+						.addColCard("col-12 col-sm-4 col-lg-2", "competitor", "Competitor", "\n" + 
 								"                                        3 Month<br/>\n" + 
 								"                                        CYCLE<br/>\n" + 
 								"                                        7 jours<br/>\n" + 
@@ -51,13 +64,18 @@ public class IndexController {
 								"                                        Functional<br/>\n" + 
 								"                                        movement :Injury<br/>\n" + 
 								"                                        Prevention")
-							.withFooterLink("#contact", "50€ / mois")
+							.withFooterLink("50€ / mois", "#contact")
 
-							.addCard("personnal-training", "Personnal Training", "Weightlifting")
-								.withFooterLink("#contact", "Sur devis")
+							.addColCard("col-12 col-sm-6 col-lg-2", "personnal-training", "Personnal Training", "Weightlifting")
+								.withFooterLink("Sur devis", "#contact")
+								
+							.addColCard("col-12 col-sm-6 col-lg-2", "personnal-training-hour", "Personnal Training", "1 hour")
+								.withFooterLink("50€ / mois", "#contact")
 								
 					.addSection("contact", "Contact")
-						.addCard("<p class=\"text-center\">\n" + 
+						.row()
+						.addColEmpty("col-sm-1")
+						.addColCard("col-12 col-sm-10", "<p class=\"text-center\">\n" + 
 								"                                    Laissez-nous votre email et votre message, nous vous répondrons rapidement.\n" + 
 								"                                </p>\n" + 
 								"                                <form action=\"https://getsimpleform.com/messages?form_api_token=0614d6cda955d996be8799845f653a8c\" method=\"post\">\n" + 
@@ -73,11 +91,14 @@ public class IndexController {
 								"                                    <input type='submit' class=\"btn btn-primary float-right\"></input>\n" + 
 								"                                </form>")
 						
-						.withFooter("Never Back Down", "26 Boulevard du 26ème RI, 54000 Nancy", "+336 12 23 45 69", "contact@never-backdown.fr")
+						.withFooter("26 Boulevard du 26ème RI, 54000 Nancy", "+336 12 23 45 69", "contact@never-backdown.fr")
 							.twitter("url")
 							.facebook("url")
-							.instagram("url");
+							.instagram("url")
+						.build();
 			
+				model.addAttribute("site", site);
+				return "neverbackdown";
 		
 	}
 

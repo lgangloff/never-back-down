@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 
 import { MenuModule } from './menu/menu.module';
 import { UsersModule } from './users/users.module';
+import { FilesModule } from './files/files.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/auth/auth.guard';
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     SharedModule,
     UsersModule,
+    FilesModule,
     MenuModule,
 
     RouterModule.forRoot(

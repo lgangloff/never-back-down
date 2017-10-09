@@ -23,6 +23,10 @@ export class MenuComponent implements OnInit {
     return this.principal.isAuthenticated();
   }
 
+  isInRole(roleName: string){
+    return true;
+    //return this.principal.hasAuthority(roleName).subscribe();
+  }
 
 
 }

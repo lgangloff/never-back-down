@@ -1,0 +1,30 @@
+<div class="files-wrapper">
+  
+    <alert-error [error]="error"></alert-error>
+  
+    <div class="row vcenter">
+      <div class="col-10">
+        <div class="card">
+          <div class="card-block">
+              <form novalidate (ngSubmit)="search()">
+                <div class="row">
+                  <div class="col-9">
+                    <input type="text" class="form-control" placeholder="filename" [(ngModel)]="searchValue" name="searchValue">
+                  </div>
+                  <div class="col-3 float-right">
+                    <submit-button [status]="searchStatus" [value]="'Rechercher'" class="float-right"></submit-button>
+                  </div>
+                </div>
+                
+              </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <button type="submit" class="btn btn-primary" [routerLink]="['/file/new']">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+</div>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${site.title}">${site.title}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{static/css/reset.css}" />
+    <link rel="stylesheet" th:href="@{static/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{static/css/root.css}" />
+    <link rel="stylesheet" th:href="@{static/css/main.css}" />
+    
+    
+    <style type="text/css" th:inline="text">
+    
+    
+	    #header-wrapper{
+		    background-image: url('[[${site.backGroundImage}]]');
+		}
+		#header .logo{
+		    background-image: url('[[${site.logoImage500}]]');
+		}
+		
+		@media screen and (max-width: 576px) {
+		    #header .logo{
+		    	background-image: url('[[${site.logoImage300}]]');
+		    }
+		}
+    
+    </style>
+</head>
+
+<body>
+
+    <div id="wrapper" >
+
+        <div id="header-wrapper">
+            <header id="header" class="container align-center">
+                <span class="logo" title="${site.title}"></span>
+                <p th:text="${site.slogan}"></p>
+            </header>
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="#header" class="active">Home</a></li>
+                <li th:each="section : ${site.sections}">
+                	<a th:href="@{'#' + ${section.name}}" th:text="${section.title}"></a>
+               	</li>
+            </ul>
+        </nav>
+        <div id="main">
+        
+            <section th:each="section : ${site.sections}" th:id="${section.name}" class="container">
+                <h1 th:text="${section.title}">section-title</h1>
+                <div th:each="row : ${section.rows}" th:class="'row ' + ${row.css}">
+                    <div th:each="col : ${row.cols}" th:class="${col.css}">
+                        <div th:if="${col.card}" class="card">
+                            <img th:if="${col.card.imgSrcTop}" class="card-img-top" th:src="${col.card.imgSrcTop}" alt="${col.card.title}">                           
+                            <div class="card-block" th:if="${col.card.block.title}">
+                                <h3 class="card-title" th:text="${col.card.block.title}">card-title</h3>
+                                <p class="card-text" th:utext="${col.card.block.text}">card-text</p>
+                            </div>
+                          	<div class="card-block" th:if="${col.card.block.html}" th:utext="${col.card.block.html}"></div>
+                          	
+                            <ul class="list-group list-group-flush" th:if="${col.card.items}">
+                                <li class="list-group-item" th:each="item : ${col.card.items}" th:text="${item}">item text</li>
+                            </ul>
+                            <div th:if="${col.card.link}" class="card-footer text-muted text-center">
+                                <a th:href="@{${col.card.link.href}}" class="card-link" th:text="${col.card.link.text}">item link text</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+
+
+            <div class="footer-wrapper clearfix">
+                
+                <footer id="footer" class="container">
+                    <section>
+                        <h2 th:text="${site.title}"></h2>
+                        <div class="row">
+                            <div class="col-12 col-sm-4">
+                                <span>Address</span>
+                                <p th:text="${site.contactAddress}"></p>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <span>Phone</span>
+                                <p th:text="${site.contactTel}"></p>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <span>Email</span>
+                                <p th:text="${site.contactEmail}"></p>
+                            </div>
+                        </div>
+                        <ul class="icons">
+                            <li th:each="link : ${site.footerLinks}">
+                            	<a href="@{${link.href}}" th:class="'icon fa-' + ${link.name} + ' alt'">
+                            		<span class="label" th:text="${link.text}"></span>
+                           		</a>
+                           	</li>
+                        </ul>
+                    </section>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>
