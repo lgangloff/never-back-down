@@ -12,7 +12,7 @@ import { FileDetailComponent } from './file-detail/file-detail.component';
 const filesRoutes: Routes = [
   { path: 'files',  component: FilesComponent, canActivate: [AuthGuard] },
   { path: 'file/new', component: FileDetailComponent, canActivate: [AuthGuard] },
-  //{ path: 'user/:id', component: UserDetailComponent, canActivate: [AuthGuard] },
+  { path: 'file/:id', component: FileDetailComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

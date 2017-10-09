@@ -27,4 +27,22 @@
       </div>
     </div>
 
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Content-Type</th>
+        <th>Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files">
+        <td><a [routerLink]="['/file', file.id]">{{file.name}}</a></td>
+        <td> {{file.contentType}} </td>
+        <td> {{file.size / 1024 | number : '1.2-2' }} Ko</td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>

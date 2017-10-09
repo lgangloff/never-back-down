@@ -1,16 +1,18 @@
 package org.lgangloff.nbd.domain;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "file")
@@ -35,7 +37,9 @@ public class File extends AbstractAuditingEntity {
 	
 	private Long size;
 	
-	@Lob
+	
+	@JsonIgnore
+	@Basic
 	private byte[] datas;
 
 	public Long getId() {

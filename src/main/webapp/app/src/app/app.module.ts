@@ -16,6 +16,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { UserService } from "./services/user.service";
+import { FileService } from "./services/file.service";
 import { AuthorityService } from "./services/authority.service";
 
 const appRoutes: Routes = [
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
       } // <-- debugging purposes only
     )
   ],
-  providers: [UserService, AuthorityService],
+  providers: [UserService, AuthorityService, FileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

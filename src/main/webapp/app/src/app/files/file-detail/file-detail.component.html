@@ -15,15 +15,20 @@
             <input type="text" class="form-control" id="uuid" name="uuid" [(ngModel)]="file.uuid" readonly>
         </div>
       </div>
+      <div class="row form-group" *ngIf="file.contentType">
+        <div class="col-12">
+            <input type="text" class="form-control" id="contentType" name="contentType" [(ngModel)]="file.contentType" readonly>
+        </div>
+      </div>
       <div class="row form-group" *ngIf="file.name">
         <div class="col-12">
-            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="file.name" readonly>
+            <a href="api/file/{{file.uuid}}">{{file.name}}</a>
         </div>
       </div>
 
-      <div class="row form-group">
+      <div class="row form-group" *ngIf="!file.id">
         <div class="col-12">
-            <input type="file" class="form-control" id="datas" name="datas" [(ngModel)]="file.datas">
+            <input type="file" class="form-control" #fileInput>
         </div>
       </div>
 
@@ -31,7 +36,7 @@
         <button type="button" class="btn btn-danger" (click)="delete()">Supprimer</button>
         <div class="float-right">
           <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
-          <submit-button [status]="status" [disabled]="!fileForm.form.valid" [value]="'Valider'"></submit-button>
+          <submit-button [status]="status" [disabled]="!fileForm.form.valid" [value]="'Valider'"  *ngIf="!file.id"></submit-button>
         </div>
       </div>
 

@@ -24,7 +24,7 @@
             </column>
             
             <column name="name" type="varchar(256)"/>
-            <column name="contentType" type="varchar(36)"/>
+            <column name="content_type" type="varchar(36)"/>
             <column name="size" type="int"/>
             <column name="datas" type="bytea"/>
             
