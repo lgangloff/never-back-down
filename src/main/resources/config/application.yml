@@ -1,9 +1,7 @@
 server:
     port: 8080
 
-liquibase:
-    change-log: classpath:config/liquibase/master.xml
-    contexts: dev
+
     
     
 logback:
@@ -11,6 +9,9 @@ logback:
   app.loglevel: DEBUG
 
 spring:
+    liquibase:
+        change-log: classpath:config/liquibase/master.xml
+        contexts: dev
     profiles:
         active: local
     datasource:

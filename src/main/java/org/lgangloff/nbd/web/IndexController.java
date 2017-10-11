@@ -1,24 +1,39 @@
 package org.lgangloff.nbd.web;
 
+import java.util.Map;
+
+import org.lgangloff.nbd.config.Constants;
+import org.lgangloff.nbd.domain.WebSiteConfig;
 import org.lgangloff.nbd.domain.front.WebSite;
+import org.lgangloff.nbd.domain.i18n.enumeration.LangKey;
+import org.lgangloff.nbd.service.I18nService;
 import org.lgangloff.nbd.service.WebSiteBuilder;
+import org.lgangloff.nbd.service.WebSiteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
+	
+	@Autowired
+	private WebSiteService webSiteService;
+	
+	@Autowired
+	private I18nService i18nService;
 
 	@RequestMapping({"/", "/index.html"})
 	public String index(Model model) {
 		
-		WebSite site = WebSiteBuilder.newWebSite("never-back-down", "Never Back Down - Program")
+		WebSiteConfig webSiteConfig = webSiteService.getWebSiteConfig();
+		Map<String, String> i18n = i18nService.findWebSiteI18nValues(LangKey.en_EN);
+		
+		WebSite site = WebSiteBuilder.newWebSite(Constants.WEBSITE_CONFIG_NAME, i18n.get("website.title"))
 				.withBackGroundImage("static/images/background.jpg")
 				.withLogoImage("static/images/logo-500.png", "static/images/logo-300.png")
-				.withSlogan("Une programmation d’entrainement élaborée par une équipe de\n" + 
-						"                        coach expérimentés et de sportifs de haut niveau à votre écoute\n" + 
-						"                        afin de vous permettre de passer vos limites.")
-			.addSection("coachs", "Coachs")
+				.withSlogan(i18n.get("website.slogan"))
+			.addSection("coachs", i18n.get("website.section.title.coachs"))
 				.row()
 				.addColEmpty("col-lg-2")
 				.addColCard("col-12 col-sm-6 col-lg-4", "benoit", "Benoit Jacquemin", "Head Coach Crossfit Nancy")
@@ -35,7 +50,7 @@ public class IndexController {
 					.addElement("8 fois champion de France")
 					.addElement("Champion du Monde Masters")
 					.addElement("12ème Jeux Olympiques")
-			.addSection("programs", "Programs")
+			.addSection("programs", i18n.get("website.section.title.programs"))
 				.row()
 				.addColEmpty("col-lg-1")
 				.addColCard("col-12 col-sm-4 col-lg-2", "free", "Free", "Programmation du jour")
@@ -72,13 +87,13 @@ public class IndexController {
 							.addColCard("col-12 col-sm-6 col-lg-2", "personnal-training-hour", "Personnal Training", "1 hour")
 								.withFooterLink("50€ / mois", "#contact")
 								
-					.addSection("contact", "Contact")
+					.addSection("contact", i18n.get("website.section.title.contact"))
 						.row()
 						.addColEmpty("col-sm-1")
 						.addColCard("col-12 col-sm-10", "<p class=\"text-center\">\n" + 
 								"                                    Laissez-nous votre email et votre message, nous vous répondrons rapidement.\n" + 
 								"                                </p>\n" + 
-								"                                <form action=\"https://getsimpleform.com/messages?form_api_token=0614d6cda955d996be8799845f653a8c\" method=\"post\">\n" + 
+								"                                <form action=\"https://getsimpleform.com/messages?form_api_token="+webSiteConfig.getFormContactKey()+"\" method=\"post\">\n" + 
 								"                                    <div class=\"form-group\">\n" + 
 								"                                        <label for=\"exampleInputEmail1\">Adresse mail</label>\n" + 
 								"                                        <input type=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Saississez votre adresse mail\" name=\"email\">\n" + 
@@ -91,10 +106,10 @@ public class IndexController {
 								"                                    <input type='submit' class=\"btn btn-primary float-right\"></input>\n" + 
 								"                                </form>")
 						
-						.withFooter("26 Boulevard du 26ème RI, 54000 Nancy", "+336 12 23 45 69", "contact@never-backdown.fr")
-							.twitter("url")
-							.facebook("url")
-							.instagram("url")
+						.withFooter(i18n.get("website.contact.address"), i18n.get("website.contact.tel"), webSiteConfig.getEmail())
+//							.twitter("url")
+							.facebook(webSiteConfig.getFbUrl())
+//							.instagram("url")
 						.build();
 			
 				model.addAttribute("site", site);

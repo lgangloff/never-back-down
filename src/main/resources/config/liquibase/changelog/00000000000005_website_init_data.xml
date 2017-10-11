@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql"/>
+    <property name="autoIncrement" value="false" dbms="oracle"/>
+
+    <changeSet id="00000000000005" author="lgangloff">
+    
+    	<insert tableName="web_site_config">
+    		<column name="name" value="never-back-down"></column>
+    		<column name="form_contact_key" value="0614d6cda955d996be8799845f653a8c"></column>
+    		<column name="email" value="contact@never-backdown.fr"></column>
+    		<column name="fb_url" value="http://www.facebook.com/neverbackdown"></column>
+    		<column name="created_by" value="system"></column>
+    	</insert>
+    	
+    	<insert tableName="i18n_key">
+            <column name="id" value="1"/>
+            <column name="group_name" value="never-back-down"/>
+            <column name="name" value="website.title"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	<insert tableName="i18n_value">
+            <column name="i18n_key_id" value="1"/>
+            <column name="lang_key" value="en_EN"/>
+            <column name="value" value="Never Back Down - Program"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	
+    	<insert tableName="i18n_key">
+            <column name="id" value="2"/>
+            <column name="group_name" value="never-back-down"/>
+            <column name="name" value="website.slogan"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	<insert tableName="i18n_value">
+            <column name="i18n_key_id" value="2"/>
+            <column name="lang_key" value="en_EN"/>
+            <column name="value" value="Une programmation d’entrainement élaborée par une équipe de coach expérimentés et de sportifs de haut niveau à votre écoute afin de vous permettre de passer vos limites."/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	
+    	
+    	
+    	<insert tableName="i18n_key">
+            <column name="id" value="3"/>
+            <column name="group_name" value="never-back-down"/>
+            <column name="name" value="website.section.title.coachs"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	<insert tableName="i18n_value">
+            <column name="i18n_key_id" value="3"/>
+            <column name="lang_key" value="en_EN"/>
+            <column name="value" value="Coachs"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	
+    	
+    	<insert tableName="i18n_key">
+            <column name="id" value="4"/>
+            <column name="group_name" value="never-back-down"/>
+            <column name="name" value="website.section.title.programs"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	<insert tableName="i18n_value">
+            <column name="i18n_key_id" value="4"/>
+            <column name="lang_key" value="en_EN"/>
+            <column name="value" value="Programs"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	
+    	<insert tableName="i18n_key">
+            <column name="id" value="5"/>
+            <column name="group_name" value="never-back-down"/>
+            <column name="name" value="website.section.title.contact"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	<insert tableName="i18n_value">
+            <column name="i18n_key_id" value="5"/>
+            <column name="lang_key" value="en_EN"/>
+            <column name="value" value="Contact"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	
+    	<insert tableName="i18n_key">
+            <column name="id" value="6"/>
+            <column name="group_name" value="never-back-down"/>
+            <column name="name" value="website.contact.address"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	<insert tableName="i18n_value">
+            <column name="i18n_key_id" value="6"/>
+            <column name="lang_key" value="en_EN"/>
+            <column name="value" value="26 Boulevard du 26ème RI, 54000 Nancy"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	
+    	<insert tableName="i18n_key">
+            <column name="id" value="7"/>
+            <column name="group_name" value="never-back-down"/>
+            <column name="name" value="website.contact.tel"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    	
+    	<insert tableName="i18n_value">
+            <column name="i18n_key_id" value="7"/>
+            <column name="lang_key" value="en_EN"/>
+            <column name="value" value="+336 12 23 45 69"/>
+            <column name="created_by" value="system"/>
+    	</insert>
+    </changeSet>
+    
+</databaseChangeLog>
