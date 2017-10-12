@@ -17,6 +17,7 @@ import { AuthGuard } from './shared/auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { UserService } from "./services/user.service";
 import { FileService } from "./services/file.service";
+import { WebsiteModule } from "./website/website.module";
 import { AuthorityService } from "./services/authority.service";
 
 const appRoutes: Routes = [
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
     SharedModule,
     UsersModule,
     FilesModule,
+    WebsiteModule,
     MenuModule,
 
     RouterModule.forRoot(

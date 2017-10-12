@@ -17,6 +17,11 @@ public interface I18nRepository extends JpaRepository<I18nValue,Long> {
     		+ "left join fetch val.i18nKey key "
     		+ "where key.groupName = :groupName and val.langKey = :langKey")
 	List<I18nValue> findAllByGroupName(@Param("groupName") String groupName, @Param("langKey") LangKey langKey);
+
+    @Query("select val from I18nValue val "
+    		+ "left join fetch val.i18nKey key "
+    		+ "where key.groupName = :groupName")
+    List<I18nValue> findAllByGroupName(@Param("groupName") String groupName);
     
 
 }
