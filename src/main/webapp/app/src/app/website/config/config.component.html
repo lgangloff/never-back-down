@@ -1,3 +1,31 @@
-<p>
-  config works!
-</p>
+<div class="card">
+  <div class="card-block">
+    <form novalidate (ngSubmit)="onSubmit()" #websiteForm="ngForm" >
+
+      <alert-error [error]="error"></alert-error>
+
+
+      <div class="row form-group">
+        <div class="col-12">
+            <input type="text" class="form-control" id="name" name="webSite.name" [(ngModel)]="webSite.name" readonly>
+        </div>
+
+        <div class="col-12" *ngFor="let i18nKey of i18nKeys();">
+          <label>{{i18nKey}}</label>
+
+          <input type="text" class="form-control" id="website.title" name="i18nValues['{{i18nKey}}'][0].value" 
+          [(ngModel)]="i18nValues[i18nKey][0].value">
+      </div>
+
+      </div>
+
+      <div class="form-group">
+        <div class="float-right">
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+          <submit-button [status]="status" [disabled]="!websiteForm.form.valid" [value]="'Valider'"></submit-button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

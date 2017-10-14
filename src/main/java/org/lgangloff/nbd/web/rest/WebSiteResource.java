@@ -62,8 +62,10 @@ public class WebSiteResource {
 	 * GET /website/i18n -> get the website i18n properties config.
 	 */
 	@RequestMapping(value = "/website/i18n", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<I18nKey, List<I18nValue>>> getWebSiteI18n() {
-		return Optional.ofNullable(i18nService.findWebSiteI18nValues()).map(web -> new ResponseEntity<>(web, HttpStatus.OK))
+	public ResponseEntity<Map<String, List<I18nValue>>> getWebSiteI18n() {
+		return Optional.ofNullable(
+				i18nService.findWebSiteI18nValues()
+				).map(web -> new ResponseEntity<>(web, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 

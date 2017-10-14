@@ -17,6 +17,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.lgangloff.nbd.domain.AbstractAuditingEntity;
 import org.lgangloff.nbd.domain.i18n.enumeration.LangKey;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "i18n_value")
@@ -32,6 +34,7 @@ public class I18nValue extends AbstractAuditingEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "i18n_key_id")
+    @JsonIgnore
 	private I18nKey i18nKey;
     
     @Column(name="lang_key")

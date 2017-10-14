@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/auth/auth.guard';
 import { SharedModule } from '../shared/shared.module';
 import { ConfigComponent } from './config/config.component';
+import {WebSiteService} from './services/website.service';
 
 
 
@@ -22,6 +23,6 @@ const websiteRoutes: Routes = [
   ],
   declarations: [ConfigComponent],
   exports: [ConfigComponent, RouterModule],
-  providers: []
+  providers: [WebSiteService]
 })
 export class WebsiteModule { }
