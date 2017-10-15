@@ -14,7 +14,7 @@ export class ConfigComponent implements OnInit {
   private error;
 
   webSite: WebSiteConfig;
-  i18nValues: Map<String, I18nValue[]>;
+  i18nValues: Map<String, Map<String, I18nValue>>;
 
   constructor(
     private service: WebSiteService) { }

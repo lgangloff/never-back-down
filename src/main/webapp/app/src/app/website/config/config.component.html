@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-block">
-    <form novalidate (ngSubmit)="onSubmit()" #websiteForm="ngForm" >
+    <form novalidate (ngSubmit)="onSubmit()" #websiteForm="ngForm" *ngIf="webSite" >
 
       <alert-error [error]="error"></alert-error>
 
@@ -10,12 +10,10 @@
             <input type="text" class="form-control" id="name" name="webSite.name" [(ngModel)]="webSite.name" readonly>
         </div>
 
-        <div class="col-12" *ngFor="let i18nKey of i18nKeys();">
-          <label>{{i18nKey}}</label>
 
-          <input type="text" class="form-control" id="website.title" name="i18nValues['{{i18nKey}}'][0].value" 
-          [(ngModel)]="i18nValues[i18nKey][0].value">
-      </div>
+        <div class="col-12" *ngFor="let i18nKey of i18nKeys();">
+            <i18n [model]="i18nValues['i18nKey}}']"></i18n>
+        </div>
 
       </div>
 
