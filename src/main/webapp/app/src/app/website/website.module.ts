@@ -4,8 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../shared/auth/auth.guard';
 import { SharedModule } from '../shared/shared.module';
+import { FilesModule } from '../files/files.module';
 import { ConfigComponent } from './config/config.component';
-import {WebSiteService} from './services/website.service';
+import { WebSiteService } from './services/website.service';
 
 
 
@@ -20,6 +21,7 @@ const websiteRoutes: Routes = [
     RouterModule.forChild(websiteRoutes),
     CommonModule,
     SharedModule,
+    FilesModule,
   ],
   declarations: [ConfigComponent],
   exports: [ConfigComponent, RouterModule],

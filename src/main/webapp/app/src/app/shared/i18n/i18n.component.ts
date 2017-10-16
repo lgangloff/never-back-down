@@ -8,12 +8,30 @@ import { I18nValue } from '../domain/i18n.model';
 })
 export class I18nComponent implements OnInit {
 
-  @Input("model")
-  private model: I18nValue[];
+  @Input("valuesByKey")
+  private valuesByKey: Map<string, I18nValue[]>;
+
+  @Input("key")
+  private key: string;
+
+  @Input("values")
+  private values: I18nValue[];
+
+  @Input("type")
+  private type: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public getValues(){
+
+    if (this.key != null && this.valuesByKey != null){
+      return this.valuesByKey[this.key];
+    }
+    return this.values;
+
   }
 
 }

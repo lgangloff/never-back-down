@@ -1,22 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Location} from '@angular/common';
 import {FileService} from '../../services/file.service';
 import {File} from '../../shared/domain/file.model';
 
 @Component({
-  selector: 'app-file-detail',
-  templateUrl: './file-detail.component.html',
-  styleUrls: ['./file-detail.component.css']
+  selector: 'file-edit',
+  templateUrl: './file-edit.component.html',
+  styleUrls: ['./file-edit.component.css']
 })
-export class FileDetailComponent implements OnInit {
-  
+export class FileEditComponent implements OnInit {
+    
+  @Input("file")
   private file = new File();
   private error;
   private status:string;
 
   @ViewChild('fileInput') fileInput;
- 
+  
   
   constructor(
     private service: FileService,
@@ -26,19 +27,6 @@ export class FileDetailComponent implements OnInit {
 
 
   ngOnInit(){
-    let id = this.route.snapshot.paramMap.get('id');
-    if (!id){
-      this.file = new File();
-    }
-    else{
-      this.service.get(id).subscribe(file=>{
-          this.file = file;
-        },
-        err=>{
-          this.router.navigate(["files"]);
-        }
-      )
-    }
   }
 
 
@@ -53,9 +41,11 @@ export class FileDetailComponent implements OnInit {
       this.service.store(formData).subscribe(
         success=>{
           this.status = "success";
-          setTimeout (() => {
-            this.router.navigate(["files"]);
-          }, 1000)
+          this.file.id = success.id;
+          this.file.contentType = success.contentType;
+          this.file.name = success.name;
+          this.file.uuid = success.uuid;
+          this.file.size = success.size;
         },
         e=>{
           this.status = "error";
@@ -70,7 +60,7 @@ export class FileDetailComponent implements OnInit {
   delete(){
     if (confirm("Etes-vous sur de vouloir supprimer le fichier ?")){
       this.service.delete(this.file).subscribe(res=>{
-        this.router.navigate(["files"]);
+        this.file=null;
       });
     }
   }

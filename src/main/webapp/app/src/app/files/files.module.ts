@@ -6,6 +6,7 @@ import { AuthGuard } from '../shared/auth/auth.guard';
 import { SharedModule } from '../shared/shared.module';
 import { FilesComponent } from './files.component';
 import { FileDetailComponent } from './file-detail/file-detail.component';
+import { FileEditComponent } from './file-edit/file-edit.component';
 
 
 
@@ -21,8 +22,8 @@ const filesRoutes: Routes = [
     CommonModule,
     SharedModule,
   ],
-  declarations: [FilesComponent, FileDetailComponent],
-  exports: [FilesComponent, RouterModule],
+  declarations: [FilesComponent, FileDetailComponent, FileEditComponent],
+  exports: [FilesComponent, FileEditComponent, RouterModule],
   providers: []
 })
 export class FilesModule { }

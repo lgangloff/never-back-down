@@ -1,7 +1,13 @@
-<div class="input-group" *ngFor="let m of model">
+<div class="input-group" *ngFor="let i18n of getValues();">
 
-  <span class="input-group-addon" id="basic-addon1">{{m.langKey}}</span>
+  <span class="input-group-addon" id="basic-addon1">{{i18n.langKey}}</span>
+ 
+  <input *ngIf="type == 'text'" type="text" class="form-control" aria-describedby="basic-addon1" 
+      name="i18n.value" [(ngModel)]="i18n.value" />
 
-  <input type="text" class="form-control" aria-describedby="basic-addon1" 
-    name="m.value" [(ngModel)]="m.value" />
+
+  <textarea *ngIf="type == 'textarea'" class="form-control" aria-describedby="basic-addon1" 
+    name="i18n.value" [(ngModel)]="i18n.value" row="5"></textarea>
+
+
 </div>

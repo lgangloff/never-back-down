@@ -5,16 +5,93 @@
       <alert-error [error]="error"></alert-error>
 
 
-      <div class="row form-group">
+      <div class="row form-group" >
         <div class="col-12">
             <input type="text" class="form-control" id="name" name="webSite.name" [(ngModel)]="webSite.name" readonly>
         </div>
 
 
-        <div class="col-12" *ngFor="let i18nKey of i18nKeys();">
-            <i18n [model]="i18nValues['i18nKey}}']"></i18n>
-        </div>
+      </div>
 
+      <div class="row form-group">
+        <div class="col-12">
+            <label>Titre du site</label>
+            <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.title'"></i18n>
+        </div>    
+      </div>
+
+      <div class="row form-group">
+          <div class="col-12">
+              <label>Slogan du site</label>
+              <i18n type="textarea" [valuesByKey]="i18nValues" [key]="'website.slogan'"></i18n>
+          </div>    
+      </div>
+      
+      <div class="row form-group">
+          <div class="col-12 col-lg-6">
+              <label>Adresse</label>
+              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.contact.address'"></i18n>
+          </div>    
+
+          <div class="col-12 col-lg-6">
+              <label>Téléphone</label>
+              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.contact.tel'"></i18n>
+          </div>    
+      </div>
+
+      <div class="row form-group">
+          <div class="col-12 col-lg-6">
+              <label>Email</label>
+              <input type="email" class="form-control" id="email" name="webSite.email" [(ngModel)]="webSite.email" required />
+          </div>    
+
+          <div class="col-12 col-lg-6">
+              <label>Clé du formulaire de contact</label>
+              <input type="text" class="form-control" id="formContactKey" name="webSite.formContactKey" [(ngModel)]="webSite.formContactKey" required />
+          </div>    
+      </div>
+
+      <div class="row form-group">
+          <div class="col-12 col-lg-4">
+              <label>Titre section 'Programs'</label>
+              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.section.title.programs'"></i18n>
+          </div>    
+          
+          <div class="col-12 col-lg-4">
+              <label>Titre section 'Coach'</label>
+              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.section.title.coachs'"></i18n>
+          </div>    
+          
+          <div class="col-12 col-lg-4">
+              <label>Titre section 'Contact'</label>
+              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.section.title.contact'"></i18n>
+          </div>    
+      </div>
+
+      <div class="row form-group">
+          <div class="col-12">
+            <label>Image de fond</label>
+            <file-edit [file]="webSite.backgroundImageFile"></file-edit>
+          </div>
+      </div>
+
+
+
+      <div class="row form-group">
+          <div class="col-12 col-lg-4">
+              <label>Twitter</label>
+              <input type="text" class="form-control" id="twitterUrl" name="webSite.twitterUrl" [(ngModel)]="webSite.twitterUrl" />
+          </div>    
+          
+          <div class="col-12 col-lg-4">
+              <label>FaceBook</label>
+              <input type="text" class="form-control" id="fbUrl" name="webSite.fbUrl" [(ngModel)]="webSite.fbUrl" />
+          </div>    
+          
+          <div class="col-12 col-lg-4">
+              <label>Instagram</label>
+              <input type="text" class="form-control" id="instaUrl" name="webSite.instaUrl" [(ngModel)]="webSite.instaUrl" />
+          </div>    
       </div>
 
       <div class="form-group">

@@ -16,7 +16,7 @@ export class WebSiteService {
 
 
   getI18n(){
-    return this.http.get<Map<String, Map<String, I18nValue>>>("api/website/i18n");
+    return this.http.get<Map<String, [I18nValue]>>("api/website/i18n");
   }
 
   

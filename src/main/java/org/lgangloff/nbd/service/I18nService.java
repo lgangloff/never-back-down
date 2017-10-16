@@ -30,7 +30,9 @@ public class I18nService {
 
 
 	public Map<String, List<I18nValue>> findWebSiteI18nValues() {
-		return i18nRepository.findAllByGroupName(Constants.WEBSITE_CONFIG_NAME).stream().collect(Collectors.groupingBy(v->v.getI18nKey().getName()));
+		return i18nRepository.findAllByGroupName(Constants.WEBSITE_CONFIG_NAME)
+					.stream().collect(
+							Collectors.groupingBy(v->v.getI18nKey().getName()));
 	}
 
 

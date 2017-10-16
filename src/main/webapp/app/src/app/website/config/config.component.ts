@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {WebSiteService} from '../services/website.service';
 import {WebSiteConfig} from '../domain/website.model';
 import {I18nValue} from '../../shared/domain/i18n.model';
+import {File} from '../../shared/domain/file.model';
 
 @Component({
   selector: 'app-config',
@@ -13,11 +14,12 @@ export class ConfigComponent implements OnInit {
   private searchStatus;
   private error;
 
-  webSite: WebSiteConfig;
-  i18nValues: Map<String, Map<String, I18nValue>>;
+  private webSite: WebSiteConfig;
+  private i18nValues: Map<String, I18nValue[]>;
 
   constructor(
-    private service: WebSiteService) { }
+    private service: WebSiteService) {
+  }
 
   ngOnInit() {
     this.search();
@@ -27,6 +29,9 @@ export class ConfigComponent implements OnInit {
     this.searchStatus = "wait";
     this.service.get().subscribe(res =>{
       this.webSite = res;
+      if (this.webSite.backgroundImageFile == null){
+        this.webSite.backgroundImageFile = new File();
+      }
       this.service.getI18n().subscribe(res=>{
         this.i18nValues = res;
         this.searchStatus = null;
@@ -38,12 +43,9 @@ export class ConfigComponent implements OnInit {
     });
   }
 
-  i18nKeys() : Array<string> {
-    return Object.keys(this.i18nValues);
-  }
-
   
   onSubmit() {
+    console.log(this.webSite);
     console.log(this.i18nValues);
   }
 

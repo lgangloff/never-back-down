@@ -1,0 +1,27 @@
+      <form novalidate (ngSubmit)="onSubmit()" #fileForm="ngForm" >
+  
+        <alert-error [error]="error"></alert-error>
+  
+        <div class="row form-group" *ngIf="file.id">
+          <div class="col-12">
+              <img src="api/files/{{file.uuid}}" height="200px" *ngIf="file.contentType.indexOf('image') != -1"/>
+              <a href="api/files/{{file.uuid}}" target="_blank">
+                {{file.name}}
+              </a>
+              <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="file.id">Supprimer</button>
+          </div>
+        </div>
+  
+        <div class="row form-group" *ngIf="!file.id">
+          <div class="col-12">
+              <input type="file" class="form-control" #fileInput>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <div class="float-right">
+            <submit-button [status]="status" [disabled]="!fileForm.form.valid" value="Valider"></submit-button>
+          </div>
+        </div>
+  
+      </form>
