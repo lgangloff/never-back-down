@@ -9,5 +9,7 @@
     <include file="classpath:config/liquibase/changelog/00000000000003_add_i18n_entity.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000004_add_website_entity.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000005_website_init_data.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/00000000000006_add_column_temp_to_file_entity.xml" relativeToChangelogFile="false"/>
+    
 	
 </databaseChangeLog>

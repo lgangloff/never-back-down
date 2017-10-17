@@ -26,6 +26,9 @@ public class File extends AbstractAuditingEntity {
             sequenceName = "file_id_seq", initialValue = 1, allocationSize = 20)
     private Long id;
 
+	@Column(name = "temp", nullable = false)
+	private boolean tempFile = true;
+	
     @Size(max = 36)
     @Column(name = "uuid", length = 36, nullable = false, unique = true)
 	private String uuid;
@@ -83,6 +86,14 @@ public class File extends AbstractAuditingEntity {
 		this.size = size;
 	}
 
+	public boolean isTempFile() {
+		return tempFile;
+	}
+
+	public void setTempFile(boolean tempFile) {
+		this.tempFile = tempFile;
+	}
+
 	public byte[] getDatas() {
 		return datas;
 	}
@@ -90,4 +101,12 @@ public class File extends AbstractAuditingEntity {
 	public void setDatas(byte[] datas) {
 		this.datas = datas;
 	}
+
+	@Override
+	public String toString() {
+		return "File [id=" + id + ", tempFile=" + tempFile + ", uuid=" + uuid + ", name=" + name + ", contentType="
+				+ contentType + "]";
+	}
+	
+	
 }

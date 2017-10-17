@@ -11,11 +11,10 @@ import {File} from '../../shared/domain/file.model';
 })
 export class ConfigComponent implements OnInit {
 
-  private searchStatus;
+  private status;
   private error;
 
   private webSite: WebSiteConfig;
-  private i18nValues: Map<String, I18nValue[]>;
 
   constructor(
     private service: WebSiteService) {
@@ -26,27 +25,33 @@ export class ConfigComponent implements OnInit {
   }
 
   search(){
-    this.searchStatus = "wait";
     this.service.get().subscribe(res =>{
       this.webSite = res;
       if (this.webSite.backgroundImageFile == null){
         this.webSite.backgroundImageFile = new File();
       }
-      this.service.getI18n().subscribe(res=>{
-        this.i18nValues = res;
-        this.searchStatus = null;
-      })
+      if (this.webSite.logo500ImageFile == null){
+        this.webSite.logo500ImageFile = new File();
+      }
+      if (this.webSite.logo300ImageFile == null){
+        this.webSite.logo300ImageFile = new File();
+      }
     },
     err=>{
-      this.searchStatus = null;
       this.error = err;
     });
   }
 
   
   onSubmit() {
-    console.log(this.webSite);
-    console.log(this.i18nValues);
+    this.status = "wait";
+    this.service.save(this.webSite).subscribe( res =>{
+      this.status = "success";
+      this.search();
+    }, err=>{
+      this.status = "error";
+      this.error = err;
+    });
   }
 
 }

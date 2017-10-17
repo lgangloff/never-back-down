@@ -48,7 +48,7 @@ public class WebSite {
 	}
 
 	public void addFooterLink(String name, String text, String href) {
-		this.footerLinks.add(new Link(name, href, text));
+		this.footerLinks.add(new Link(name, text, href));
 	}
 
 

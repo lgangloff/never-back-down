@@ -7,6 +7,7 @@ import org.lgangloff.nbd.domain.WebSiteConfig;
 import org.lgangloff.nbd.domain.front.WebSite;
 import org.lgangloff.nbd.domain.i18n.enumeration.LangKey;
 import org.lgangloff.nbd.service.I18nService;
+import org.lgangloff.nbd.service.StorageService;
 import org.lgangloff.nbd.service.WebSiteBuilder;
 import org.lgangloff.nbd.service.WebSiteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,23 @@ public class IndexController {
 	
 	@Autowired
 	private WebSiteService webSiteService;
-	
+
 	@Autowired
 	private I18nService i18nService;
+	@Autowired
+	private StorageService storageService;
 
 	@RequestMapping({"/", "/index.html"})
 	public String index(Model model) {
 		
 		WebSiteConfig webSiteConfig = webSiteService.getWebSiteConfig();
-		Map<String, String> i18n = i18nService.findWebSiteI18nValues(LangKey.en_EN);
+		Map<String, String> i18n = i18nService.findI18nValues(webSiteConfig.getName(), LangKey.en_EN);
 		
 		WebSite site = WebSiteBuilder.newWebSite(Constants.WEBSITE_CONFIG_NAME, i18n.get("website.title"))
-				.withBackGroundImage("static/images/background.jpg")
-				.withLogoImage("static/images/logo-500.png", "static/images/logo-300.png")
+				.withBackGroundImage(storageService.getDownloadUrlOrDefault(webSiteConfig.getBackgroundImageFile(), "static/images/background.jpg"))
+				.withLogoImage(
+						storageService.getDownloadUrlOrDefault(webSiteConfig.getLogo500ImageFile(), "static/images/logo-500.png"),
+						storageService.getDownloadUrlOrDefault(webSiteConfig.getLogo300ImageFile(), "static/images/logo-300.png"))
 				.withSlogan(i18n.get("website.slogan"))
 			.addSection("coachs", i18n.get("website.section.title.coachs"))
 				.row()
@@ -107,9 +112,9 @@ public class IndexController {
 								"                                </form>")
 						
 						.withFooter(i18n.get("website.contact.address"), i18n.get("website.contact.tel"), webSiteConfig.getEmail())
-//							.twitter("url")
+							.twitter(webSiteConfig.getTwitterUrl())
 							.facebook(webSiteConfig.getFbUrl())
-//							.instagram("url")
+							.instagram(webSiteConfig.getInstaUrl())
 						.build();
 			
 				model.addAttribute("site", site);

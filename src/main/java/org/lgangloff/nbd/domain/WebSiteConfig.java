@@ -1,5 +1,9 @@
 package org.lgangloff.nbd.domain;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,9 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.lgangloff.nbd.domain.i18n.I18nValue;
 
 @Entity
 @Table(name = "web_site_config")
@@ -21,7 +27,7 @@ public class WebSiteConfig extends AbstractAuditingEntity{
 	@Id
     @GeneratedValue(generator = "web_site_config_seq")
     @SequenceGenerator(name = "web_site_config_seq",
-            sequenceName = "web_site_config_id_seq", initialValue = 1, allocationSize = 20)
+            sequenceName = "web_site_config_id_seq", allocationSize = 20)
     private Long id;
 	
 
@@ -29,16 +35,16 @@ public class WebSiteConfig extends AbstractAuditingEntity{
 	private String name;
     
     
-    @ManyToOne(fetch=FetchType.LAZY, optional=true)
+    @ManyToOne(fetch=FetchType.LAZY, optional=true, cascade= {CascadeType.REMOVE})
     @JoinColumn(name="background_image_file_id")
     private File backgroundImageFile;
     
 
-    @ManyToOne(fetch=FetchType.LAZY, optional=true)
+    @ManyToOne(fetch=FetchType.LAZY, optional=true, cascade= {CascadeType.REMOVE})
     @JoinColumn(name="logo_500_image_file_id")
     private File logo500ImageFile;
     
-    @ManyToOne(fetch=FetchType.LAZY, optional=true)
+    @ManyToOne(fetch=FetchType.LAZY, optional=true, cascade= {CascadeType.REMOVE})
     @JoinColumn(name="logo_300_image_file_id")
     private File logo300ImageFile;
     
@@ -58,6 +64,9 @@ public class WebSiteConfig extends AbstractAuditingEntity{
     private String twitterUrl;
     @Column(name = "insta_url", length = 512, nullable = true, unique = false)
     private String instaUrl;
+    
+    @Transient
+    private Map<String, List<I18nValue>> i18nFields;
     
 	public Long getId() {
 		return id;
@@ -118,6 +127,19 @@ public class WebSiteConfig extends AbstractAuditingEntity{
 	}
 	public void setInstaUrl(String instaUrl) {
 		this.instaUrl = instaUrl;
+	}
+	public Map<String, List<I18nValue>> getI18nFields() {
+		return i18nFields;
+	}
+	public void setI18nFields(Map<String, List<I18nValue>> i18nFields) {
+		this.i18nFields = i18nFields;
+	}
+	@Override
+	public String toString() {
+		return "WebSiteConfig [id=" + id + ", name=" + name + ", backgroundImageFile=" + backgroundImageFile
+				+ ", logo500ImageFile=" + logo500ImageFile + ", logo300ImageFile=" + logo300ImageFile
+				+ ", formContactKey=" + formContactKey + ", email=" + email + ", fbUrl=" + fbUrl + ", twitterUrl="
+				+ twitterUrl + ", instaUrl=" + instaUrl + ", i18nFields=" + i18nFields + "]";
 	}
     
     

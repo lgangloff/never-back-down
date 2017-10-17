@@ -95,7 +95,7 @@
                         </div>
                         <ul class="icons">
                             <li th:each="link : ${site.footerLinks}">
-                            	<a href="@{${link.href}}" th:class="'icon fa-' + ${link.name} + ' alt'">
+                            	<a th:href="@{${link.href}}" th:class="'icon fa-' + ${link.name} + ' alt'" target="_blank">
                             		<span class="label" th:text="${link.text}"></span>
                            		</a>
                            	</li>

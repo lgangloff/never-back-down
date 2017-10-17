@@ -15,8 +15,17 @@ export class WebSiteService {
   }
 
 
-  getI18n(){
-    return this.http.get<Map<String, [I18nValue]>>("api/website/i18n");
+  save(config:WebSiteConfig){
+    if (config.logo300ImageFile != null && config.logo300ImageFile.id == null){
+      config.logo300ImageFile = null;
+    }
+    if (config.logo500ImageFile != null && config.logo500ImageFile.id == null){
+      config.logo500ImageFile = null;
+    }
+    if (config.backgroundImageFile != null && config.backgroundImageFile.id == null){
+      config.backgroundImageFile = null;
+    }
+    return this.http.put<WebSiteConfig>("api/website", config);
   }
 
   

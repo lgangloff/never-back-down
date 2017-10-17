@@ -58,11 +58,11 @@ export class FileEditComponent implements OnInit {
   }
 
   delete(){
-    if (confirm("Etes-vous sur de vouloir supprimer le fichier ?")){
-      this.service.delete(this.file).subscribe(res=>{
-        this.file=null;
-      });
-    }
+    this.file.id = null;
+    this.file.contentType = null;
+    this.file.name = null;
+    this.file.uuid = null;
+    this.file.size = null;
   }
 
   cancel(){

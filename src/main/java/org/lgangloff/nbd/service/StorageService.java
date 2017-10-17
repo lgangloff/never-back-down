@@ -26,6 +26,7 @@ public class StorageService {
 		file.setName(multipartFile.getOriginalFilename());
 		file.setSize(multipartFile.getSize());
 		file.setDatas(multipartFile.getBytes());
+		file.setTempFile(true);
 		
 		return fileRepository.saveAndFlush(file);
 	}
@@ -45,5 +46,17 @@ public class StorageService {
 	public void deleteFile(Long id) {
 		fileRepository.deleteById(id);
 	}
+
+	public void markAsUsed(File file) {
+		if (file != null && file.getId() != null) {
+			File refreshFile = fileRepository.getOne(file.getId());
+			refreshFile.setTempFile(false);
+		}
+	}
+
+	public String getDownloadUrlOrDefault(File file, String url) {
+		return file != null ? "api/files/"+file.getUuid()  : url; 
+	}
+
 
 }

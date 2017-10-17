@@ -12,7 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WebSiteConfigRepository extends JpaRepository<WebSiteConfig,Long> {
 
-	@Query("select config from WebSiteConfig config FETCH ALL PROPERTIES where config.name = :name")
+	@Query("select config from WebSiteConfig config "
+			+ "left join fetch config.backgroundImageFile "
+			+ "left join fetch config.logo500ImageFile "
+			+ "left join fetch config.logo300ImageFile "
+			+ "where config.name = :name")
 	WebSiteConfig findOneByName(@Param("name") String name);    
 
 }

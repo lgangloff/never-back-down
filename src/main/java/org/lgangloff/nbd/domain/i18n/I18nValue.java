@@ -1,5 +1,6 @@
 package org.lgangloff.nbd.domain.i18n;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,7 +33,7 @@ public class I18nValue extends AbstractAuditingEntity {
             sequenceName = "i18n_value_id_seq", initialValue = 1, allocationSize = 20)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST})
     @JoinColumn(name = "i18n_key_id")
     @JsonIgnore
 	private I18nKey i18nKey;
@@ -74,7 +75,10 @@ public class I18nValue extends AbstractAuditingEntity {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "[id=" + id + ", langKey=" + langKey + ", value=" + value + "]";
+	}
+		
 }

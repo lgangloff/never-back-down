@@ -16,26 +16,26 @@
       <div class="row form-group">
         <div class="col-12">
             <label>Titre du site</label>
-            <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.title'"></i18n>
+            <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.title'"></i18n>
         </div>    
       </div>
 
       <div class="row form-group">
           <div class="col-12">
               <label>Slogan du site</label>
-              <i18n type="textarea" [valuesByKey]="i18nValues" [key]="'website.slogan'"></i18n>
+              <i18n type="textarea" [valuesByKey]="webSite.i18nFields" [key]="'website.slogan'"></i18n>
           </div>    
       </div>
       
       <div class="row form-group">
           <div class="col-12 col-lg-6">
               <label>Adresse</label>
-              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.contact.address'"></i18n>
+              <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.contact.address'"></i18n>
           </div>    
 
           <div class="col-12 col-lg-6">
               <label>Téléphone</label>
-              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.contact.tel'"></i18n>
+              <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.contact.tel'"></i18n>
           </div>    
       </div>
 
@@ -54,17 +54,17 @@
       <div class="row form-group">
           <div class="col-12 col-lg-4">
               <label>Titre section 'Programs'</label>
-              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.section.title.programs'"></i18n>
+              <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.section.title.programs'"></i18n>
           </div>    
           
           <div class="col-12 col-lg-4">
               <label>Titre section 'Coach'</label>
-              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.section.title.coachs'"></i18n>
+              <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.section.title.coachs'"></i18n>
           </div>    
           
           <div class="col-12 col-lg-4">
               <label>Titre section 'Contact'</label>
-              <i18n type="text" [valuesByKey]="i18nValues" [key]="'website.section.title.contact'"></i18n>
+              <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.section.title.contact'"></i18n>
           </div>    
       </div>
 
@@ -76,6 +76,20 @@
       </div>
 
 
+      <div class="row form-group">
+        <div class="col-12">
+          <label>Logo en 500*500px</label>
+          <file-edit [file]="webSite.logo500ImageFile"></file-edit>
+        </div>
+     </div>
+
+
+     <div class="row form-group">
+        <div class="col-12">
+          <label>Logo en 300*300px</label>
+          <file-edit [file]="webSite.logo300ImageFile"></file-edit>
+        </div>
+     </div>
 
       <div class="row form-group">
           <div class="col-12 col-lg-4">
@@ -97,7 +111,7 @@
       <div class="form-group">
         <div class="float-right">
           <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
-          <submit-button [status]="status" [disabled]="!websiteForm.form.valid" [value]="'Valider'"></submit-button>
+          <submit-button [status]="status" [disabled]="!websiteForm.form.valid" value="Valider"></submit-button>
         </div>
       </div>
 

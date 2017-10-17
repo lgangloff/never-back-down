@@ -30,6 +30,16 @@ public class I18nKey extends AbstractAuditingEntity {
 
 	private String name;
 
+	public I18nKey() {
+		super();
+	}
+
+	public I18nKey(String name, String groupName) {
+		this();
+		this.name = name;
+		this.groupName = groupName;
+	}
+
 	public Long getId() {
 		return id;
 	}

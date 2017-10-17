@@ -18,8 +18,25 @@ public class WebSiteService {
 	@Autowired
 	private WebSiteConfigRepository webSiteConfigRepository;
 
+	@Autowired
+	private StorageService storageService;
+	@Autowired
+	private I18nService i18nService;
+
 	public WebSiteConfig getWebSiteConfig() {
 		return webSiteConfigRepository.findOneByName(Constants.WEBSITE_CONFIG_NAME);
+	}
+
+	public void update(WebSiteConfig config) {
+		config.setName(Constants.WEBSITE_CONFIG_NAME);
+		
+		storageService.markAsUsed(config.getBackgroundImageFile());
+		storageService.markAsUsed(config.getLogo500ImageFile());
+		storageService.markAsUsed(config.getLogo300ImageFile());
+		
+		i18nService.saveI18nValues(config.getI18nFields(), config.getName());
+		
+		webSiteConfigRepository.save(config);
 	}
 	
 }

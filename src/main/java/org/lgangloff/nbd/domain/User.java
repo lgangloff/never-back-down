@@ -48,7 +48,7 @@ public class User extends AbstractAuditingEntity implements Serializable, UserDe
 	@Id
     @GeneratedValue(generator = "user_seq")
     @SequenceGenerator(name = "user_seq",
-            sequenceName = "user_id_seq", initialValue = 1, allocationSize = 20)
+            sequenceName = "user_id_seq",  allocationSize = 20)
     private Long id;
 
     @NotNull        
