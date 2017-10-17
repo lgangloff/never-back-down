@@ -26,7 +26,7 @@ public class I18nService {
 	
 	
 	public Map<String, String> findI18nValues(String groupName, LangKey lang){
-		return i18nRepository.findAllByGroupName(groupName, lang).stream().collect(Collectors.toMap(v->v.getI18nKey().getName(), I18nValue::getValue));
+		return i18nRepository.findAllByGroupName(groupName, lang).stream().collect(Collectors.toMap(v->v.getI18nKey().getName(), v->v.getValue() == null ? "" : v.getValue()));
 	}
 
 
