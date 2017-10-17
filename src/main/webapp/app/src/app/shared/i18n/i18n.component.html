@@ -1,6 +1,8 @@
 <div class="input-group" *ngFor="let i18n of getValues();">
 
-  <span class="input-group-addon" id="basic-addon1">{{i18n.langKey}}</span>
+  <span class="input-group-addon" id="basic-addon1">
+        <img src="static/images/i18n/{{i18n.langKey}}.png" title="{{i18n.langKey}}">
+  </span>
  
   <input *ngIf="type == 'text'" type="text" class="form-control" aria-describedby="basic-addon1" 
       name="i18n.value" [(ngModel)]="i18n.value" />
