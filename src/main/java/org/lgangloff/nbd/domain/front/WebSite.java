@@ -9,6 +9,11 @@ public class WebSite {
 	public String name;
 	
 	public String title;	
+
+	public String description;
+	public String keywords;
+	public String author;
+	
 	public String slogan;
 	
 	public String backGroundImage;
@@ -62,5 +67,13 @@ public class WebSite {
 	public void setLogoImage(String url500, String url300) {
 		this.logoImage500 = url500;
 		this.logoImage300 = url300;
+	}
+
+
+
+	public void setMeta(String description, String keywords, String author) {
+		this.description = description;
+		this.keywords = keywords;
+		this.author = author;
 	}
 }

@@ -38,6 +38,7 @@ public class IndexController {
 						storageService.getDownloadUrlOrDefault(webSiteConfig.getLogo500ImageFile(), "static/images/logo-500.png"),
 						storageService.getDownloadUrlOrDefault(webSiteConfig.getLogo300ImageFile(), "static/images/logo-300.png"))
 				.withSlogan(i18n.get("website.slogan"))
+				.withMeta(i18n.get("website.meta.description"), i18n.get("website.meta.keywords"), i18n.get("website.meta.author"))
 			.addSection("coachs", i18n.get("website.section.title.coachs"))
 				.row()
 				.addColEmpty("col-lg-2")

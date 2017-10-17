@@ -21,6 +21,25 @@
       </div>
 
       <div class="row form-group">
+        <div class="col-12">
+            <label>Description de référencement</label>
+            <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.meta.description'"></i18n>
+        </div>    
+      </div>
+      <div class="row form-group">
+        <div class="col-12">
+            <label>Mot clé de référence</label>
+            <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.meta.keywords'"></i18n>
+        </div>    
+      </div>
+      <div class="row form-group">
+        <div class="col-12">
+            <label>Auteur de référencement</label>
+            <i18n type="text" [valuesByKey]="webSite.i18nFields" [key]="'website.meta.author'"></i18n>
+        </div>    
+      </div>
+
+      <div class="row form-group">
           <div class="col-12">
               <label>Slogan du site</label>
               <i18n type="textarea" [valuesByKey]="webSite.i18nFields" [key]="'website.slogan'"></i18n>

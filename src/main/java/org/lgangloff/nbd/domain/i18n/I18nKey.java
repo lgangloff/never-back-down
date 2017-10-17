@@ -21,7 +21,7 @@ public class I18nKey extends AbstractAuditingEntity {
 	@Id
     @GeneratedValue(generator = "i18n_key_seq")
     @SequenceGenerator(name = "i18n_key_seq",
-            sequenceName = "i18n_key_id_seq", initialValue = 1, allocationSize = 20)
+            sequenceName = "i18n_key_id_seq", allocationSize = 20)
     private Long id;
 	
 

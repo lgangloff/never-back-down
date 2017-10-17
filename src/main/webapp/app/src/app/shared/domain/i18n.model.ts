@@ -4,6 +4,7 @@ export class I18nValue{
     langKey:string;
     value:string;
 
-    constructor(){
+    constructor(langKey:string){
+        this.langKey = langKey;
     }
 }

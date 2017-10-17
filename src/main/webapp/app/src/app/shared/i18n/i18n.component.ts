@@ -8,6 +8,8 @@ import { I18nValue } from '../domain/i18n.model';
 })
 export class I18nComponent implements OnInit {
 
+  private langs = ["en_EN", "fr_FR"];
+
   @Input("valuesByKey")
   private valuesByKey: Map<string, I18nValue[]>;
 
@@ -26,12 +28,33 @@ export class I18nComponent implements OnInit {
   }
 
   public getValues(){
-
+    let ret: I18nValue[];
     if (this.key != null && this.valuesByKey != null){
-      return this.valuesByKey[this.key];
-    }
-    return this.values;
+      if (this.valuesByKey[this.key] == null){
+        this.valuesByKey[this.key] = [];
+      }
 
+      ret = this.valuesByKey[this.key];
+    }
+    else{
+      ret = this.values;
+    }
+  
+
+    let orderedRet: I18nValue[];
+    this.langs.forEach(lang => {
+      let exists = false;
+      ret.forEach(v=>{
+        if (v.langKey == lang){
+          exists = true;
+        }
+      })
+      if (!exists){
+        ret.push(new I18nValue(lang));
+      }
+    });
+
+    return ret.sort((v1,v2)=>{return v1.langKey.localeCompare(v2.langKey);});
   }
 
 }

@@ -161,6 +161,11 @@ public class WebSiteBuilder {
 		return this;
 	}
 
+	public WebSiteBuilder withMeta(String description, String keywords, String author) {
+		this.site.setMeta(description, keywords, author);
+		return this;
+	}
+
 	public WebSiteBuilder withBackGroundImage(String url) {
 		this.site.setBackGroundImage(url);
 		return this;

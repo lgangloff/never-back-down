@@ -30,7 +30,7 @@ public class I18nValue extends AbstractAuditingEntity {
 	@Id
     @GeneratedValue(generator = "i18n_value_seq")
     @SequenceGenerator(name = "i18n_value_seq",
-            sequenceName = "i18n_value_id_seq", initialValue = 1, allocationSize = 20)
+            sequenceName = "i18n_value_id_seq",  allocationSize = 20)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST})

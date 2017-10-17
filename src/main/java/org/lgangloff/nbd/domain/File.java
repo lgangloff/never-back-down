@@ -23,7 +23,7 @@ public class File extends AbstractAuditingEntity {
 	@Id
     @GeneratedValue(generator = "file_seq")
     @SequenceGenerator(name = "file_seq",
-            sequenceName = "file_id_seq", initialValue = 1, allocationSize = 20)
+            sequenceName = "file_id_seq", allocationSize = 20)
     private Long id;
 
 	@Column(name = "temp", nullable = false)
