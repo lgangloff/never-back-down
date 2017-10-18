@@ -35,7 +35,7 @@ public class MailConfiguration {
 	@Description("Thymeleaf template resolver serving HTML 5 emails")
 	public ClassLoaderTemplateResolver emailTemplateResolver() {
 		ClassLoaderTemplateResolver emailTemplateResolver = new ClassLoaderTemplateResolver();
-		emailTemplateResolver.setPrefix("templates/mails/");
+		emailTemplateResolver.setPrefix("templates/");
 		emailTemplateResolver.setSuffix(".html");
 		emailTemplateResolver.setTemplateMode("HTML");
 		emailTemplateResolver.setCharacterEncoding("UTF-8");

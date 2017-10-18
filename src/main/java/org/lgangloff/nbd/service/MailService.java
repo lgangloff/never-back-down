@@ -48,7 +48,7 @@ public class MailService {
 
 		WebSiteConfig config = webSiteService.getWebSiteConfig();
 		
-		String content = templateEngine.process("new-password", context);
+		String content = templateEngine.process("mails/new-password", context);
 		String subject = "Information de connexion";
 		
 		mailSender.sendEmail(config.getEmail(), user.getLogin(), subject, content, false, true);
