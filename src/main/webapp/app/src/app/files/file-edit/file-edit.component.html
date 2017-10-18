@@ -4,8 +4,8 @@
   
         <div class="row form-group" *ngIf="file.id">
           <div class="col-12">
-              <img src="api/files/{{file.uuid}}" height="100px" *ngIf="file.contentType.indexOf('image') != -1"/>
-              <a href="api/files/{{file.uuid}}" target="_blank">
+              <img src="api/dl-files/{{file.uuid}}" height="100px" *ngIf="file.contentType.indexOf('image') != -1"/>
+              <a href="api/dl-files/{{file.uuid}}" target="_blank">
                 {{file.name}}
               </a>
               <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="file.id">Supprimer</button>

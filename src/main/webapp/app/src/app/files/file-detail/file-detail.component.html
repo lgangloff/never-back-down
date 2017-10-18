@@ -30,12 +30,12 @@
             </div>
         </div>
         <div class="col-6 vcenter">
-            <a href="api/files/{{file.uuid}}" target="_blank">
+            <a href="api/dl-files/{{file.uuid}}" target="_blank">
               {{file.name}}
             </a>
         </div>
         <div class="col-6">
-            <img src="api/files/{{file.uuid}}" height="200px" *ngIf="file.contentType.indexOf('image') != -1"/>
+            <img src="api/dl-files/{{file.uuid}}" height="200px" *ngIf="file.contentType.indexOf('image') != -1"/>
         </div>
       </div>
 

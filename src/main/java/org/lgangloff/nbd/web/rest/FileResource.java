@@ -60,10 +60,10 @@ public class FileResource {
 	}
 
 	/**
-	 * GET /files/:uuid -> download the "uuid" file.
+	 * GET /dl-files/:uuid -> download the "uuid" file.
 	 * @throws IOException 
 	 */
-	@RequestMapping(value = "/files/{uuid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/dl-files/{uuid}", method = RequestMethod.GET)
 	public void download(@PathVariable String uuid, @RequestParam(value = "dl", required = false) boolean forceDownload, HttpServletResponse response) throws IOException {
 		log.debug("REST request to download File : {}", uuid);
 
