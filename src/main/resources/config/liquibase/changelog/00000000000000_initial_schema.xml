@@ -44,11 +44,11 @@
             <column name="created_by" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+            <column name="created_date" type="TIMESTAMP WITH TIME ZONE" defaultValueDate="${now}">
                 <constraints nullable="false"/>
             </column>
             <column name="last_modified_by" type="varchar(100)"/>
-            <column name="last_modified_date" type="timestamp"/>
+            <column name="last_modified_date" type="TIMESTAMP WITH TIME ZONE"/>
         </createTable>
         <sql>
         	alter sequence user_id_seq RESTART with 1000;
@@ -107,7 +107,7 @@
                   separator=";"
                   tableName="user">
             <column name="activated" type="boolean"/>
-            <column name="created_date" type="timestamp"/>
+            <column name="created_date" type="TIMESTAMP WITH TIME ZONE"/>
         </loadData>
 
         <loadData encoding="UTF-8"

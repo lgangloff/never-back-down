@@ -1,3 +1,5 @@
+app.url: http://www.never-backdown.fr/app/
+
 server:
     port: 8080
 
@@ -55,8 +57,5 @@ async:
     maxPoolSize: 50
     queueCapacity: 10000
             
-mail:
-    username: ${SENDGRID_USERNAME}
-    password: ${SENDGRID_PASSWORD}
-    protocol: sendgrid
-    from: no-reply@never-back-down.fr
+
+email.sendgrid.api.key: ${SENDGRID_API_KEY}

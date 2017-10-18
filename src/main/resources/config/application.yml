@@ -1,8 +1,7 @@
+app.url: http://localhost:4200/app/
+
 server:
     port: 8080
-
-
-    
     
 logback:
   loglevel: INFO
@@ -60,13 +59,3 @@ async:
     corePoolSize: 2
     maxPoolSize: 50
     queueCapacity: 10000
-
-mail:
-    host: localhost
-    port: 25
-    username:
-    password:
-    protocol: smtp
-    tls: false
-    auth: false
-    from: no-reply@localhost.fr

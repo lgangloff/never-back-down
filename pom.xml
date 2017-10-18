@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.M4</version>
+		<version>2.0.0.M5</version>
 	</parent>
 
 	<groupId>org.lgangloff.nbd</groupId>
@@ -90,6 +90,13 @@
 			<version>${usertype-core.version}</version>
 		</dependency>
 
+
+		
+		<dependency>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
+		</dependency>
+		
 
 	</dependencies>
 	<build>
@@ -175,7 +182,7 @@
 									<goal>npm</goal>
 								</goals>
 								<configuration>
-									<arguments>run build</arguments>
+									<arguments>run build -prod --base-href /app</arguments>
 								</configuration>
 							</execution>
 						</executions>

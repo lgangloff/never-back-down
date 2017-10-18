@@ -43,6 +43,9 @@ public class UserService {
 
     @Autowired
     private PersistentTokenRepository persistentTokenRepository;
+
+    @Autowired
+	private MailService mailService;
   
     /**
      * Persistent Token are used for providing automatic authentication, they should be automatically deleted after
@@ -106,10 +109,8 @@ public class UserService {
 		member.setEnabled(false);
 		member.setLocked(false);
 		
-		/*
-		 * TODO:
-		 * mailService.sendPasswordEmail(member, generatePassword);
-		 */
+		mailService.sendPassword(member, generatePassword);
+		 
 		userRepository.save(member);
 	}
 	
