@@ -1,4 +1,4 @@
-package org.lgangloff.nbd.service;
+package org.lgangloff.nbd.mail;
 
 
 public interface MailSender {

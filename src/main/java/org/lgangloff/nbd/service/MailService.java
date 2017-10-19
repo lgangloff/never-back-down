@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.lgangloff.nbd.domain.User;
 import org.lgangloff.nbd.domain.WebSiteConfig;
+import org.lgangloff.nbd.mail.MailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

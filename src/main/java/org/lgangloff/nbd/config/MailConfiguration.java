@@ -2,7 +2,9 @@ package org.lgangloff.nbd.config;
 
 import java.io.IOException;
 
-import org.lgangloff.nbd.service.MailSender;
+import org.lgangloff.nbd.mail.LogMailSender;
+import org.lgangloff.nbd.mail.MailSender;
+import org.lgangloff.nbd.mail.SendGridMailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,46 +51,13 @@ public class MailConfiguration {
 	public MailSender sendGridMailSender() {
     	String apiKey = env.getProperty("mail.sendgrid.api.key");
 		log.debug("Configuring sendgrid mail server with api key {}", apiKey);
-		return new MailSender() {
-
-			@Override
-			@Async
-			public void sendEmail(String fromStr, String toStr, String subject, String contentStr, boolean isMultipart,
-					boolean isHtml) {
-
-				Email from = new Email(fromStr);
-				Email to = new Email(toStr);
-				Content content = new Content(isHtml ? "text/html" : "text/plain", contentStr);
-
-				Mail mail = new Mail(from, subject, to, content);
-
-				SendGrid sg = new SendGrid(apiKey);
-				Request request = new Request();
-				try {
-					request.setMethod(Method.POST);
-					request.setEndpoint("mail/send");
-					request.setBody(mail.build());
-					Response response = sg.api(request);
-					System.out.println(response.getStatusCode());
-					System.out.println(response.getBody());
-					System.out.println(response.getHeaders());
-				} catch (IOException e) {
-					log.warn("E-mail could not be sent to user '{}' with SendGrid, exception is: {}", to,
-							e.getMessage());
-				}
-			}
-		};		
+		return new SendGridMailSender(apiKey);
 	}
 
 
 	@Bean
 	public MailSender logMailSender() {
 		log.debug("Configuring LOG  mail server");
-		return new MailSender() {
-			@Override
-			public void sendEmail(String from, String to, String subject, String content, boolean isMultipart, boolean isHtml) {
-				log.info("Send mail to {} from {} with subject {} and content {}", to, from, subject, content);
-			}
-		};
+		return new LogMailSender();
 	}
 }
