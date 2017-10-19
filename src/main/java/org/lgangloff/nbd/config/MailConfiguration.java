@@ -6,11 +6,11 @@ import org.lgangloff.nbd.service.MailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -44,9 +44,11 @@ public class MailConfiguration {
 	}
 
 	@Bean
+	@Primary
 	@ConditionalOnProperty("mail.sendgrid.api.key")
 	public MailSender sendGridMailSender() {
-		log.debug("Configuring sendgrid mail server");
+    	String apiKey = env.getProperty("mail.sendgrid.api.key");
+		log.debug("Configuring sendgrid mail server with api key {}", apiKey);
 		return new MailSender() {
 
 			@Override
@@ -60,7 +62,6 @@ public class MailConfiguration {
 
 				Mail mail = new Mail(from, subject, to, content);
 
-		    	String apiKey = env.getProperty("mail.sendgrid.api.key");
 				SendGrid sg = new SendGrid(apiKey);
 				Request request = new Request();
 				try {
@@ -81,7 +82,6 @@ public class MailConfiguration {
 
 
 	@Bean
-	@ConditionalOnProperty(matchIfMissing= true, name="mail.sendgrid.api.key")
 	public MailSender logMailSender() {
 		log.debug("Configuring LOG  mail server");
 		return new MailSender() {
