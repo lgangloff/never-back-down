@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Principal } from '../shared/auth/principal.service';
 
 @Component({
@@ -23,9 +24,8 @@ export class MenuComponent implements OnInit {
     return this.principal.isAuthenticated();
   }
 
-  isInRole(roleName: string){
-    return true;
-    //return this.principal.hasAuthority(roleName).subscribe();
+  isInRole(roleName: string):Promise<boolean>{
+    return this.principal.hasAuthority(roleName);
   }
 
 

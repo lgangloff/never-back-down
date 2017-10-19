@@ -1,4 +1,4 @@
-app.url: http://www.never-backdown.fr/app/
+app.url: http://app.never-backdown.fr/
 
 server:
     port: 8080

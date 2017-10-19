@@ -3,22 +3,22 @@
 
     <ul class="nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item" *ngIf="isAuthenticated()">
-            <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
-        </li>
-        <li class="nav-item" *ngIf="isInRole('ROLE_ADMIN')">
-            <a class="nav-link" routerLink="/files" routerLinkActive="active">Files</a>
+            <a class="nav-link" routerLink="/" routerLinkActive="active" title="Home">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
         </li>
         <li class="nav-item" *ngIf="isInRole('ROLE_ADMIN')">
-            <a class="nav-link" routerLink="/website/config" routerLinkActive="active">Website config</a>
+            <a class="nav-link" routerLink="/users" routerLinkActive="active" title="Users">
+                <i class="fa fa-users" aria-hidden="true"></i>
+            </a>
         </li>
     </ul>   
 
     <ul class="nav navbar-right">
         <li class="nav-item" *ngIf="isAuthenticated()">
-            <a class="nav-link" routerLink="/logout" routerLinkActive="active">Logout {{displayName}}</a>
+            <a class="nav-link" routerLink="/logout" routerLinkActive="active" title="Logout {{displayName}}">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </a>
         </li>
     </ul>   
 

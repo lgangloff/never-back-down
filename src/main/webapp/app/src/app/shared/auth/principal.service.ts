@@ -13,28 +13,33 @@ export class Principal {
         private account: AccountService
     ) {}
 
-    hasAnyAuthority(authorities: string[]): Observable<boolean> {
+    hasAnyAuthority(authorities: string[]): Promise<boolean> {
+        if (!this.authenticated || !this.userIdentity || !this.userIdentity.authorities) {
+            return Promise.resolve(false);
+        }
 
-        return this.identity().map(res=>{
-            if (res && res.authorities){
-                 for (let i = 0; i < authorities.length; i++) {
-                    if (res.authorities.indexOf(authorities[i]) !== -1) {
-                        return true;
-                    }
-                }
+        for (let i = 0; i < authorities.length; i++) {
+            if (this.userIdentity.authorities.indexOf(authorities[i]) !== -1) {
+                return Promise.resolve(true);
             }
-            return false;
+        }
+
+        return Promise.resolve(false);
+    }
+
+    hasAuthority(authority: string): Promise<boolean> {
+        if (!this.authenticated) {
+           return Promise.resolve(false);
+        }
+
+        return this.identity().toPromise().then((id) => {
+            return Promise.resolve(id.authorities && id.authorities.indexOf(authority) !== -1);
+        }, () => {
+            return Promise.resolve(false);
         });
     }
 
-    hasAuthority(authority: string): Observable<boolean> {
-
-        return this.identity().map(res=>{
-            return res && res.authorities && res.authorities.indexOf(authority) !== -1;
-        });
-    }
-
-    identity(force?: boolean): Observable<any>{
+    identity(force?: boolean): Subject<any>{
         if (force === true) {
             this.userIdentity = undefined;
         }
