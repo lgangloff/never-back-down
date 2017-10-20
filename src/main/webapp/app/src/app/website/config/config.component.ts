@@ -16,8 +16,7 @@ export class ConfigComponent implements OnInit {
 
   private webSite: WebSiteConfig;
 
-  constructor(
-    private service: WebSiteService) {
+  constructor(private service: WebSiteService) {
   }
 
   ngOnInit() {
@@ -48,6 +47,9 @@ export class ConfigComponent implements OnInit {
     this.service.save(this.webSite).subscribe( res =>{
       this.status = "success";
       this.search();
+      setTimeout (() => {
+        window.scroll(0, 0);
+      }, 1000)
     }, err=>{
       this.status = "error";
       this.error = err;

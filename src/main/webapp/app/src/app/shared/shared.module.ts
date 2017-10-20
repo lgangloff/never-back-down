@@ -14,6 +14,7 @@ import { Principal } from './auth/principal.service';
 import { AuthGuard } from './auth/auth.guard';
 import { SubmitButtonComponent } from './submit-button/submit-button.component';
 import { AlertErrorComponent } from './alert-error/alert-error.component';
+import { AlertSuccessComponent } from './alert-success/alert-success.component';
 import { I18nComponent } from './i18n/i18n.component';
 
 const loginRoutes: Routes = [
@@ -27,7 +28,7 @@ const loginRoutes: Routes = [
     CommonModule, HttpModule, FormsModule, RouterModule
   ],
   exports: [
-    CommonModule, HttpModule, FormsModule, RouterModule, SubmitButtonComponent, AlertErrorComponent, I18nComponent
+    CommonModule, HttpModule, FormsModule, RouterModule, SubmitButtonComponent, AlertErrorComponent, AlertSuccessComponent, I18nComponent
   ],
   providers:[
     AuthGuard,
@@ -35,6 +36,6 @@ const loginRoutes: Routes = [
     AuthService,
     Principal,
   ],
-  declarations: [LoginComponent, LogoutComponent, SubmitButtonComponent, AlertErrorComponent, I18nComponent]
+  declarations: [LoginComponent, LogoutComponent, SubmitButtonComponent, AlertErrorComponent, AlertSuccessComponent, I18nComponent]
 })
 export class SharedModule { }

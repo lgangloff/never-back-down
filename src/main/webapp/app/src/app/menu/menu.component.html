@@ -12,6 +12,16 @@
                 <i class="fa fa-users" aria-hidden="true"></i>
             </a>
         </li>
+        <li class="nav-item" *ngIf="isInRole('ROLE_ADMIN')">
+            <a class="nav-link" routerLink="/files" routerLinkActive="active" title="Files">
+                <i class="fa fa-files-o" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item" *ngIf="isInRole('ROLE_MANAGER')">
+            <a class="nav-link" routerLink="/website/config" routerLinkActive="active" title="Website config">
+                <i class="fa fa-gear" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>   
 
     <ul class="nav navbar-right">

@@ -24,8 +24,8 @@ export class MenuComponent implements OnInit {
     return this.principal.isAuthenticated();
   }
 
-  isInRole(roleName: string):Promise<boolean>{
-    return this.principal.hasAuthority(roleName);
+  isInRole(roleName: string): boolean{
+    return this.principal.hasAnyAuthority([roleName]);
   }
 
 

@@ -4,6 +4,8 @@
 
       <alert-error [error]="error"></alert-error>
 
+      <alert-success [message]="'Le site a bien été mis à jour !'" *ngIf="status == 'success'"></alert-success>
+
 
       <div class="row form-group" >
         <div class="col-12">

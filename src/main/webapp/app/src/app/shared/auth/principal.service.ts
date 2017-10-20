@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { AccountService } from './account.service';
+import { User } from '../domain/user.model';
 
 @Injectable()
 export class Principal {
-    private userIdentity: any;
+    private userIdentity: User;
     private authenticated = false;
     private authenticationState = new Subject<any>();
 
@@ -13,30 +14,21 @@ export class Principal {
         private account: AccountService
     ) {}
 
-    hasAnyAuthority(authorities: string[]): Promise<boolean> {
-        if (!this.authenticated || !this.userIdentity || !this.userIdentity.authorities) {
-            return Promise.resolve(false);
+    hasAnyAuthority(authorities: string[]): boolean {
+        if (!this.authenticated || !this.userIdentity || !this.userIdentity.roles) {
+            //console.log("hasAnyAuthority("+authorities+") ? false (not connected: "+JSON.stringify(this.userIdentity)+")");
+            return false;
         }
 
         for (let i = 0; i < authorities.length; i++) {
-            if (this.userIdentity.authorities.indexOf(authorities[i]) !== -1) {
-                return Promise.resolve(true);
+            if (this.userIdentity.roles.indexOf(authorities[i]) !== -1) {
+                //console.log("hasAnyAuthority("+authorities+") ? true");
+                return true;
             }
         }
 
-        return Promise.resolve(false);
-    }
-
-    hasAuthority(authority: string): Promise<boolean> {
-        if (!this.authenticated) {
-           return Promise.resolve(false);
-        }
-
-        return this.identity().toPromise().then((id) => {
-            return Promise.resolve(id.authorities && id.authorities.indexOf(authority) !== -1);
-        }, () => {
-            return Promise.resolve(false);
-        });
+        //console.log("hasAnyAuthority("+authorities+") ? false (actual authorities="+JSON.stringify(this.userIdentity.roles)+")");
+        return false;
     }
 
     identity(force?: boolean): Subject<any>{
@@ -82,9 +74,5 @@ export class Principal {
 
     getAuthenticationState(): Observable<any> {
         return this.authenticationState.asObservable();
-    }
-
-    getImageUrl(): String {
-        return this.isIdentityResolved() ? this.userIdentity.imageUrl : null;
     }
 }
