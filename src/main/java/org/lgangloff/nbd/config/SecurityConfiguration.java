@@ -114,6 +114,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/dl-files/**").permitAll()
+            .antMatchers("/api/account").authenticated()
             .antMatchers(HttpMethod.POST, "/api/files/**").hasAuthority(AuthoritiesConstants.MANAGER) //creer fichier
             .antMatchers("/api/website/**").hasAuthority(AuthoritiesConstants.MANAGER) //Gerer website
             .antMatchers("/api/**").hasAuthority(AuthoritiesConstants.ADMIN); //sinon faut être admin

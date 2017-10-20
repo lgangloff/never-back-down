@@ -11,7 +11,7 @@ import { LogoutComponent } from './login/logout.component';
 import { AuthService } from './auth/auth.service';
 import { AccountService } from './auth/account.service';
 import { Principal } from './auth/principal.service';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard, RoleManagerGuard, RoleAdminGuard } from './auth/auth.guard';
 import { SubmitButtonComponent } from './submit-button/submit-button.component';
 import { AlertErrorComponent } from './alert-error/alert-error.component';
 import { AlertSuccessComponent } from './alert-success/alert-success.component';
@@ -31,7 +31,9 @@ const loginRoutes: Routes = [
     CommonModule, HttpModule, FormsModule, RouterModule, SubmitButtonComponent, AlertErrorComponent, AlertSuccessComponent, I18nComponent
   ],
   providers:[
-    AuthGuard,
+      AuthGuard,
+      RoleManagerGuard,
+      RoleAdminGuard,
     AccountService,
     AuthService,
     Principal,

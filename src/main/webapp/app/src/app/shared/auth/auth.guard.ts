@@ -9,15 +9,16 @@ import { Principal } from '../auth/principal.service';
 export class AuthGuard implements CanActivate {
 
   private authenticationState = new Subject<boolean>();
+  protected authorities: string[];
 
-  constructor(private router: Router, private principal: Principal) { }
+  constructor(protected router: Router, protected principal: Principal) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     
       if (this.principal.isAuthenticated()){
-        return true;
+        return this.checkAuthority(this.principal);
       }
 
 
@@ -26,10 +27,34 @@ export class AuthGuard implements CanActivate {
           if (!this.principal.isAuthenticated()){
             this.router.navigate(['/login']);
           }
-          this.authenticationState.next(this.principal.isAuthenticated());
+          this.authenticationState.next(this.principal.isAuthenticated() && this.checkAuthority(this.principal));
         }
       );  
       
       return this.authenticationState;
   }
+
+  checkAuthority(principal: Principal): boolean{
+    return this.authorities == null || principal.hasAnyAuthority(this.authorities);
+  }
+}
+
+
+@Injectable()
+export class RoleManagerGuard extends AuthGuard{
+  
+  constructor(protected router: Router, protected principal: Principal) {
+    super(router, principal);
+    this.authorities = ['ROLE_MANAGER'];
+   }
+}
+
+
+@Injectable()
+export class RoleAdminGuard extends AuthGuard{
+  
+  constructor(protected router: Router, protected principal: Principal) {
+    super(router, principal);
+    this.authorities = ['ROLE_ADMIN'];
+   }
 }
