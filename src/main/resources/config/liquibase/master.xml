@@ -11,6 +11,8 @@
     <include file="classpath:config/liquibase/changelog/00000000000005_website_init_data.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000006_add_column_temp_to_file_entity.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000007_alter_sequence.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/00000000000008_add_coach_entity.xml" relativeToChangelogFile="false"/>
     
+	
 	
 </databaseChangeLog>
