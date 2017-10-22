@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { UserService } from "./services/user.service";
 import { FileService } from "./services/file.service";
 import { WebsiteModule } from "./website/website.module";
+import { CoachModule } from "./coach/coach.module";
 import { AuthorityService } from "./services/authority.service";
 
 const appRoutes: Routes = [
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     UsersModule,
     FilesModule,
     WebsiteModule,
+    CoachModule,
     MenuModule,
 
     RouterModule.forRoot(

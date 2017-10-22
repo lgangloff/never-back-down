@@ -1,3 +1,44 @@
-<p>
-  coach works!
-</p>
+<div class="coachs-wrapper">
+  
+    <alert-error [error]="error"></alert-error>
+  
+    <div class="row vcenter">
+      <div class="col-10">
+        <div class="card">
+          <div class="card-block">
+              <form novalidate (ngSubmit)="search()">
+                <div class="row">
+                  <div class="col-9">
+                    <input type="text" class="form-control" placeholder="coachname" [(ngModel)]="searchValue" name="searchValue">
+                  </div>
+                  <div class="col-3 float-right">
+                    <submit-button [status]="searchStatus" [value]="'Rechercher'" class="float-right"></submit-button>
+                  </div>
+                </div>
+                
+              </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <button type="submit" class="btn btn-primary" [routerLink]="['/coach/new']">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coach of coachs">
+        <td><a [routerLink]="['/coach', coach.id]">{{coach.displayName}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
