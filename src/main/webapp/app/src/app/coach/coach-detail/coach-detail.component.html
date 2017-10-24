@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-block">
+    <form novalidate (ngSubmit)="onSubmit()" #coachForm="ngForm" *ngIf="coach" >
+
+      <alert-error [error]="error"></alert-error>
+
+      <div class="row form-group" >
+        <div class="col-12">
+            <input type="text" class="form-control" id="name" name="coach.displayName" [(ngModel)]="coach.displayName" placeholder="Nom"  required maxlength="64">
+        </div>
+      </div>
+
+      <div class="row form-group">
+          <div class="col-12">
+            <label>Photo</label>
+            <file-edit [file]="coach.photo"></file-edit>
+          </div>
+      </div>
+
+
+      <div class="row form-group">
+        <div class="col-12">
+            <label>Nom du métier</label>
+            <i18n type="text" [valuesByKey]="coach.i18nFields" [key]="'coach.job.name'"></i18n>
+        </div>    
+      </div>
+
+
+      <div class="row form-group">
+        <div class="col-2">
+            <label>Compétences</label> <br/>
+            <button type="button" class="btn btn-primary" (click)="addCompetence()" >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div class="col-10">
+
+          <div class="row form-group" *ngFor="let c of competenceKeys(); let i = index">
+              <div class="col-12">
+                  <i18n type="text" [valuesByKey]="coach.competenceI18nFields" [key]="c"></i18n>
+              </div>
+          </div>
+        </div>    
+      </div>
+
+      <div class="form-group">
+        <div class="float-right">
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+          <submit-button [status]="status" [disabled]="!coachForm.form.valid" value="Valider"></submit-button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

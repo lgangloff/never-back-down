@@ -3,14 +3,15 @@ import {I18nValue} from '../../shared/domain/i18n.model';
 
 export class Coach{
 
-    private id:number;
+    id:number;
     private name:string;
     private displayName:string;
 
-    photo: File;
+    photo: File  = new File();
     
 
     i18nFields: Map<String, I18nValue[]>;
+    competenceI18nFields: Map<String, I18nValue[]>;
 
     constructor(){
     }

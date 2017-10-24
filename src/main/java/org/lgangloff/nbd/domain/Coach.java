@@ -32,12 +32,12 @@ public class Coach extends AbstractAuditingEntity{
     private Long id;
 	
 
-    @Column(name = "name", length = 128, nullable = false, unique = false)
+    @Column(name = "name", length = 64, nullable = false, unique = false)
 	private String name;
     
     @Size(max = 50)
-    @Column(name = "display_name", length = 50)
-    private String diplayName;
+    @Column(name = "display_name", length = 64)
+    private String displayName;
     
     @ManyToOne(fetch=FetchType.LAZY, optional=true, cascade= {CascadeType.REMOVE})
     @JoinColumn(name="photo_file_id")
@@ -66,12 +66,12 @@ public class Coach extends AbstractAuditingEntity{
 		this.name = name;
 	}
 
-	public String getDiplayName() {
-		return diplayName;
+	public String getDisplayName() {
+		return displayName;
 	}
 
-	public void setDiplayName(String diplayName) {
-		this.diplayName = diplayName;
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 
 	public File getPhoto() {
