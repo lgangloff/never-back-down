@@ -36,9 +36,11 @@ public class CoachService {
 		if (coach.getI18nFields() != null)
 			i18nService.saveI18nValues(coach.getI18nFields(), coach.getName());
 
-		if (coach.getCompetenceI18nFields() != null)
+		if (coach.getCompetenceI18nFields() != null) {
+			i18nService.deleteByGroupName( coach.getName() + "-competence");
 			i18nService.saveI18nValues(coach.getCompetenceI18nFields(), coach.getName() + "-competence");
-		
+		}
+			
 		coachRepository.save(coach);
 		
 		return coach;

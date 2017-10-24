@@ -14,5 +14,7 @@ export class Coach{
     competenceI18nFields: Map<String, I18nValue[]>;
 
     constructor(){
+        this.i18nFields = new Map<String, I18nValue[]>();
+        this.competenceI18nFields = new Map<String, I18nValue[]>();
     }
 }

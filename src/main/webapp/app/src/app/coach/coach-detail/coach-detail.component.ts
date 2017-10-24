@@ -31,7 +31,6 @@ export class CoachDetailComponent implements OnInit {
     else{
       this.service.get(id).subscribe(c=>{
           this.coach = c;
-          this.addCompetence();
         },
         err=>{
           this.router.navigate(["coach"]);
@@ -71,12 +70,17 @@ export class CoachDetailComponent implements OnInit {
   }
 
   competenceKeys(){
-    console.log("keys: " + JSON.stringify(Object.keys(this.coach.competenceI18nFields)));
-    return Object.keys(this.coach.competenceI18nFields);
+    let keys = this.coach.competenceI18nFields == null ? [] : Object.keys(this.coach.competenceI18nFields);
+    return keys.sort();
   }
 
   addCompetence(){
     this.coach.competenceI18nFields["coach.competence."+(this.competenceKeys().length+1)] = [];
   }
+
+  removeCompetenceAtIndex(key:string){
+    delete this.coach.competenceI18nFields[key];
+  }
+
 
 }

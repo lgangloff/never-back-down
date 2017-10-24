@@ -49,4 +49,9 @@ public class I18nService {
 	}
 
 
+	public void deleteByGroupName(String groupName) {
+		i18nRepository.deleteByGroupName(groupName);
+	}
+
+
 }
