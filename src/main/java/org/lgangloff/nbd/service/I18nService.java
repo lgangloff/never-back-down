@@ -38,19 +38,27 @@ public class I18nService {
 
 
 	public void saveI18nValues(Map<String, List<I18nValue>> i18nFields, String groupName) {
+		
+		Map<I18nKey, List<I18nValue>> keys = i18nRepository.findAllByGroupName(groupName).stream().collect(Collectors.groupingBy(I18nValue::getI18nKey));
+		
 		for (Entry<String, List<I18nValue>> entry: i18nFields.entrySet()) {			
-			I18nKey i18nKey = i18nRepository.findI18nKey(entry.getKey(), groupName);
-			i18nKey = i18nKey != null ? i18nKey : new I18nKey(entry.getKey(), groupName);
+			I18nKey i18nKey = keys.keySet().stream().filter(k->k.getName().equals(entry.getKey())).findFirst().orElse(new I18nKey(entry.getKey(), groupName));
+			keys.remove(i18nKey);
 			for (I18nValue value : entry.getValue()) {
 				value.setI18nKey(i18nKey);
 			}
 		}
 		i18nRepository.saveAll(i18nFields.values().stream().flatMap(list->list.stream()).collect(Collectors.toList()));
+		for (Entry<I18nKey, List<I18nValue>> entry : keys.entrySet()) {
+			i18nRepository.deleteValuesOf(entry.getKey());
+			i18nRepository.deleteKeyOf(entry.getKey());
+		}
 	}
 
 
 	public void deleteByGroupName(String groupName) {
-		i18nRepository.deleteByGroupName(groupName);
+		i18nRepository.deleteValuesByGroupName(groupName);
+		i18nRepository.deleteKeyByGroupName(groupName);
 	}
 
 
