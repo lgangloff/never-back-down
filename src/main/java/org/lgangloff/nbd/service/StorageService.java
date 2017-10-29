@@ -58,5 +58,9 @@ public class StorageService {
 		return file != null ? "api/dl-files/"+file.getUuid()  : url; 
 	}
 
+	public String getDownloadUrl(File file) {
+		return getDownloadUrlOrDefault(file, "");
+	}
+
 
 }

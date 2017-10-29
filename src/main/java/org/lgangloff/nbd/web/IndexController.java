@@ -1,14 +1,22 @@
 package org.lgangloff.nbd.web;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.lgangloff.nbd.config.Constants;
+import org.lgangloff.nbd.domain.Coach;
 import org.lgangloff.nbd.domain.WebSiteConfig;
 import org.lgangloff.nbd.domain.front.WebSite;
 import org.lgangloff.nbd.domain.i18n.enumeration.LangKey;
+import org.lgangloff.nbd.service.CoachService;
 import org.lgangloff.nbd.service.I18nService;
 import org.lgangloff.nbd.service.StorageService;
 import org.lgangloff.nbd.service.WebSiteBuilder;
+import org.lgangloff.nbd.service.WebSiteBuilder.SectionBuilder;
+import org.lgangloff.nbd.service.WebSiteBuilder.SectionBuilder.RowBuilder;
+import org.lgangloff.nbd.service.WebSiteBuilder.SectionBuilder.RowBuilder.ColCardBuilder;
+import org.lgangloff.nbd.service.WebSiteBuilder.SectionBuilder.RowBuilder.ColEmptyBuilder;
 import org.lgangloff.nbd.service.WebSiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,37 +33,63 @@ public class IndexController {
 	private I18nService i18nService;
 	@Autowired
 	private StorageService storageService;
+	@Autowired
+	private CoachService coachService;
 
 	@RequestMapping({"/", "/index.html"})
 	public String index(Model model) {
 		
 		WebSiteConfig webSiteConfig = webSiteService.getWebSiteConfig();
 		Map<String, String> i18n = i18nService.findI18nValues(webSiteConfig.getName(), LangKey.en_EN);
+		List<Coach> coachs = coachService.findAllForWebSite();
 		
-		WebSite site = WebSiteBuilder.newWebSite(Constants.WEBSITE_CONFIG_NAME, i18n.get("website.title"))
+		WebSiteBuilder builder = WebSiteBuilder.newWebSite(Constants.WEBSITE_CONFIG_NAME, i18n.get("website.title"))
 				.withBackGroundImage(storageService.getDownloadUrlOrDefault(webSiteConfig.getBackgroundImageFile(), "static/images/background.jpg"))
 				.withLogoImage(
 						storageService.getDownloadUrlOrDefault(webSiteConfig.getLogo500ImageFile(), "static/images/logo-500.png"),
 						storageService.getDownloadUrlOrDefault(webSiteConfig.getLogo300ImageFile(), "static/images/logo-300.png"))
 				.withSlogan(i18n.get("website.slogan"))
-				.withMeta(i18n.get("website.meta.description"), i18n.get("website.meta.keywords"), i18n.get("website.meta.author"))
-			.addSection("coachs", i18n.get("website.section.title.coachs"))
-				.row()
-				.addColEmpty("col-lg-2")
-				.addColCard("col-12 col-sm-6 col-lg-4", "benoit", "Benoit Jacquemin", "Head Coach Crossfit Nancy")
-					.withImgTop("static/images/benoit.jpg")
-					.addElement("CrossFit Level 2 Trainer (CF-L2)")
-					.addElement("Competitor Certificate (2017)")
-					.addElement("Judge 2016 Certificate (2016)")
-					.addElement("Judges Certificate (2017)")
-					.addElement("Scaling Certificate (2016)")
-					.addElement("Spot The Flaw Certificate (1)")
-					.addElement("bpjeps agff 2014")
-				.addColCard("col-12 col-sm-6 col-lg-4", "kevin", "Kevin Bouly", "Haltérophile français")
-					.withImgTop("static/images/kevin.jpg")
-					.addElement("8 fois champion de France")
-					.addElement("Champion du Monde Masters")
-					.addElement("12ème Jeux Olympiques")
+				.withMeta(i18n.get("website.meta.description"), i18n.get("website.meta.keywords"), i18n.get("website.meta.author"));
+		
+		if (!coachs.isEmpty()) {
+			int size = coachs.size();
+			RowBuilder coachsSection = builder
+				.addSection("coachs", i18n.get("website.section.title.coachs")).row();
+			
+			int colSize = 12 / size;
+			ColEmptyBuilder prevCol = coachsSection.addColEmpty("col-lg-2");
+			
+			for (Coach coach : coachs) {
+				Map<String, String> coachi18n = i18nService.findI18nValues(coach.getName(), LangKey.en_EN);
+				Map<String, String> competencesI18n = i18nService.findI18nValues(coach.getName() + "-competence", LangKey.en_EN);
+				
+				ColCardBuilder coachCard = prevCol
+					.addColCard("col-12 col-sm-6 col-lg-4", coach.getName(), coach.getDisplayName(), coachi18n.get("coach.job.name"))
+					.withImgTop(storageService.getDownloadUrl(coach.getPhoto()));
+				
+				for (String competence : competencesI18n.values()) {
+					coachCard.addElement(competence);
+				}
+			}
+			
+					.addColCard("col-12 col-sm-6 col-lg-4", "benoit", "Benoit Jacquemin", "Head Coach Crossfit Nancy")
+						.withImgTop("static/images/benoit.jpg")
+						.addElement("CrossFit Level 2 Trainer (CF-L2)")
+						.addElement("Competitor Certificate (2017)")
+						.addElement("Judge 2016 Certificate (2016)")
+						.addElement("Judges Certificate (2017)")
+						.addElement("Scaling Certificate (2016)")
+						.addElement("Spot The Flaw Certificate (1)")
+						.addElement("bpjeps agff 2014")
+					.addColCard("col-12 col-sm-6 col-lg-4", "kevin", "Kevin Bouly", "Haltérophile français")
+						.withImgTop("static/images/kevin.jpg")
+						.addElement("8 fois champion de France")
+						.addElement("Champion du Monde Masters")
+						.addElement("12ème Jeux Olympiques");
+
+		}
+					
+		builder
 			.addSection("programs", i18n.get("website.section.title.programs"))
 				.row()
 				.addColEmpty("col-lg-1")
@@ -115,9 +149,10 @@ public class IndexController {
 						.withFooter(i18n.get("website.contact.address"), i18n.get("website.contact.tel"), webSiteConfig.getEmail())
 							.twitter(webSiteConfig.getTwitterUrl())
 							.facebook(webSiteConfig.getFbUrl())
-							.instagram(webSiteConfig.getInstaUrl())
-						.build();
+							.instagram(webSiteConfig.getInstaUrl());
 			
+		
+				WebSite site = builder.build(); 
 				model.addAttribute("site", site);
 				return "neverbackdown";
 		
