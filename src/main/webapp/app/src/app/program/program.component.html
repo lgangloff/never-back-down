@@ -1,4 +1,4 @@
-<div class="coachs-wrapper">
+<div class="programs-wrapper">
   
     <alert-error [error]="error"></alert-error>
   
@@ -9,7 +9,7 @@
               <form novalidate (ngSubmit)="search()">
                 <div class="row">
                   <div class="col-9">
-                    <input type="text" class="form-control" placeholder="coachname" [(ngModel)]="searchValue" name="searchValue">
+                    <input type="text" class="form-control" placeholder="programname" [(ngModel)]="searchValue" name="searchValue">
                   </div>
                   <div class="col-3 float-right">
                     <submit-button [status]="searchStatus" [value]="'Rechercher'" class="float-right"></submit-button>
@@ -22,10 +22,10 @@
       </div>
       <div class="col-2">
         <div class="float-right">
-	        <button type="submit" class="btn btn-primary" [routerLink]="['/coach/new']">
+	        <button type="submit" class="btn btn-primary" [routerLink]="['/program/new']">
 	            <i class="fa fa-plus" aria-hidden="true"></i>
 	        </button>
-	        </div>
+	    </div>
       </div>
     </div>
 
@@ -37,8 +37,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let coach of coachs">
-        <td><a [routerLink]="['/coach', coach.id]">{{coach.displayName}}</a></td>
+      <tr *ngFor="let program of programs">
+        <td><a [routerLink]="['/program', program.id]">{{program.name}}</a></td>
       </tr>
     </tbody>
   </table>

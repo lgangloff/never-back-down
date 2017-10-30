@@ -19,7 +19,8 @@ declare var tinymce: any;
 
 @Component({
   selector: 'tiny-editor',
-  template: `<textarea id="{{elementId}}"></textarea>`
+  template: `<textarea id="{{elementId}}"></textarea>`,
+  styleUrls: ['./tiny-editor.component.css']
 })
 export class TinyEditorComponent implements AfterViewInit, OnDestroy {
   @Input() elementId: String;

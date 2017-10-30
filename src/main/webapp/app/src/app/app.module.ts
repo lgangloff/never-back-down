@@ -19,6 +19,7 @@ import { UserService } from "./services/user.service";
 import { FileService } from "./services/file.service";
 import { WebsiteModule } from "./website/website.module";
 import { CoachModule } from "./coach/coach.module";
+import { ProgramModule } from "./program/program.module";
 import { AuthorityService } from "./services/authority.service";
 
 const appRoutes: Routes = [
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
     FilesModule,
     WebsiteModule,
     CoachModule,
+    ProgramModule,
     MenuModule,
 
     RouterModule.forRoot(

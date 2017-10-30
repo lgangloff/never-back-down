@@ -94,6 +94,10 @@ h1,h2, h3, h4{
     text-align: center;
 }
 
+.card-text p{
+	margin: 0;
+}
+
 #footer{
     text-align: center;
 }

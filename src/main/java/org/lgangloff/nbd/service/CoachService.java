@@ -4,7 +4,6 @@ import java.text.Normalizer;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.lgangloff.nbd.domain.Coach;
 import org.lgangloff.nbd.repository.CoachRepository;
@@ -51,7 +50,7 @@ public class CoachService {
 		return coachRepository.findAll(query);
 	}
 	public List<Coach> findAllForWebSite() {
-		return findAll("%").stream().map(withI18nFields()).collect(Collectors.toList());
+		return findAll("%");
 	}
 
 	public Optional<Coach> findOne(Long id) {

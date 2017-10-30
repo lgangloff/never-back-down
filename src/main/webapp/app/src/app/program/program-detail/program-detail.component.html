@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-block">
+    <form novalidate (ngSubmit)="onSubmit()" #programForm="ngForm" *ngIf="program" >
+
+      <alert-error [error]="error"></alert-error>
+
+      <div class="row form-group" >
+        <div class="col-12">
+            <input type="text" class="form-control" id="name" name="program.name" [(ngModel)]="program.name" readonly="readonly">
+        </div>
+      </div>
+
+      <div class="row form-group" >
+        <div class="col-12">
+            <label>Lien</label>
+            <input type="text" class="form-control" id="link" name="program.link" [(ngModel)]="program.link" required="required">
+        </div>
+      </div>
+      
+      <div class="row form-group">
+        <div class="col-12">
+            <label>Titre du programme</label>
+            <i18n type="text" [valuesByKey]="program.i18nFields" [key]="'program.title'" required="required"></i18n>
+        </div>    
+      </div>
+      
+      <div class="row form-group">
+        <div class="col-12">
+            <label>Prix affiché</label>
+            <i18n type="text" [valuesByKey]="program.i18nFields" [key]="'program.price.display'" required="required"></i18n>
+        </div>    
+      </div>
+
+      <div class="row form-group">
+        <div class="col-12">
+            <label>Explication du programme</label>
+            <i18n type="tiny-editor" [valuesByKey]="program.i18nFields" [key]="'program.description'"></i18n>
+        </div>    
+      </div>
+
+
+      <div class="form-group">
+        <button type="button" class="btn btn-danger" (click)="delete()">Supprimer</button>
+        <div class="float-right">
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+          <submit-button [status]="status" [disabled]="!programForm.form.valid" value="Valider"></submit-button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

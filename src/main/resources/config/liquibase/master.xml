@@ -13,6 +13,8 @@
     <include file="classpath:config/liquibase/changelog/00000000000007_alter_sequence.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000008_add_coach_entity.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000009_change_unique_i18n.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/00000000000010_add_program_entity.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/00000000000011_alter_col_value_i18n.xml" relativeToChangelogFile="false"/>
     
     
 	

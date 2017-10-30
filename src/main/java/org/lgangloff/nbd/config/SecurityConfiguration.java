@@ -117,6 +117,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account").authenticated()
             .antMatchers(HttpMethod.POST, "/api/files/**").hasAuthority(AuthoritiesConstants.MANAGER) //creer fichier
             .antMatchers("/api/website/**").hasAuthority(AuthoritiesConstants.MANAGER) //Gerer website
+            .antMatchers("/api/coachs/**").hasAuthority(AuthoritiesConstants.MANAGER) //Gerer coach
+            .antMatchers("/api/programs/**").hasAuthority(AuthoritiesConstants.MANAGER) //Gerer programs
             .antMatchers("/api/**").hasAuthority(AuthoritiesConstants.ADMIN); //sinon faut être admin
 
     }

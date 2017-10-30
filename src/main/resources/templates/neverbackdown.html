@@ -61,7 +61,7 @@
                             <img th:if="${col.card.imgSrcTop}" class="card-img-top" th:src="${col.card.imgSrcTop}" alt="${col.card.title}">                           
                             <div class="card-block" th:if="${col.card.block.title}">
                                 <h3 class="card-title" th:text="${col.card.block.title}">card-title</h3>
-                                <p class="card-text" th:utext="${col.card.block.text}">card-text</p>
+                                <div class="card-text" th:utext="${col.card.block.text}">card-text</div>
                             </div>
                           	<div class="card-block" th:if="${col.card.block.html}" th:utext="${col.card.block.html}"></div>
                           	
