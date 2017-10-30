@@ -16,6 +16,7 @@ import { SubmitButtonComponent } from './submit-button/submit-button.component';
 import { AlertErrorComponent } from './alert-error/alert-error.component';
 import { AlertSuccessComponent } from './alert-success/alert-success.component';
 import { I18nComponent } from './i18n/i18n.component';
+import { TinyEditorComponent } from './tiny-editor/tiny-editor.component';
 
 const loginRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,16 +29,16 @@ const loginRoutes: Routes = [
     CommonModule, HttpModule, FormsModule, RouterModule
   ],
   exports: [
-    CommonModule, HttpModule, FormsModule, RouterModule, SubmitButtonComponent, AlertErrorComponent, AlertSuccessComponent, I18nComponent
+    CommonModule, HttpModule, FormsModule, RouterModule, SubmitButtonComponent, AlertErrorComponent, AlertSuccessComponent, I18nComponent, TinyEditorComponent
   ],
   providers:[
-      AuthGuard,
-      RoleManagerGuard,
-      RoleAdminGuard,
-    AccountService,
-    AuthService,
-    Principal,
+	  AuthGuard,
+	  RoleManagerGuard,
+	  RoleAdminGuard,
+	  AccountService,
+	  AuthService,
+	  Principal,
   ],
-  declarations: [LoginComponent, LogoutComponent, SubmitButtonComponent, AlertErrorComponent, AlertSuccessComponent, I18nComponent]
+  declarations: [LoginComponent, LogoutComponent, SubmitButtonComponent, AlertErrorComponent, AlertSuccessComponent, I18nComponent, TinyEditorComponent]
 })
 export class SharedModule { }

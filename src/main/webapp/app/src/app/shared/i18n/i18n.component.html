@@ -10,6 +10,10 @@
 
   <textarea *ngIf="type == 'textarea'" class="form-control" aria-describedby="basic-addon1" 
     name="i18n.value" [(ngModel)]="i18n.value" row="5"></textarea>
+    
+  
+  <tiny-editor *ngIf="type == 'tiny-editor'" [elementId]="'tiny-' + i18n.id"
+  	[(value)]="i18n.value" style="width: 100%;"></tiny-editor>
 
 
 </div>

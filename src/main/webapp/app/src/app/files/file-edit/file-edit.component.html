@@ -2,7 +2,7 @@
   
         <alert-error [error]="error"></alert-error>
   
-        <div class="row form-group" *ngIf="file.id">
+        <div class="row form-group" *ngIf="file != null && file.id">
           <div class="col-12">
               <img src="api/dl-files/{{file.uuid}}" height="100px" *ngIf="file.contentType.indexOf('image') != -1"/>
               <a href="api/dl-files/{{file.uuid}}" target="_blank">
@@ -12,7 +12,7 @@
           </div>
         </div>
   
-        <div class="row form-group" *ngIf="!file.id">
+        <div class="row form-group" *ngIf="file == null || !file.id">
           <div class="col-12">
               <input type="file" class="form-control" #fileInput (change)="onSubmit()">
           </div>
