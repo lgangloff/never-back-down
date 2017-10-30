@@ -52,40 +52,51 @@ public class IndexController {
 				.withMeta(i18n.get("website.meta.description"), i18n.get("website.meta.keywords"), i18n.get("website.meta.author"));
 		
 		if (!coachs.isEmpty()) {
-			int size = coachs.size();
-			RowBuilder coachsSection = builder
-				.addSection("coachs", i18n.get("website.section.title.coachs")).row();
+			SectionBuilder coachsSection = builder
+				.addSection("coachs", i18n.get("website.section.title.coachs"));
 			
-			int colSize = 12 / size;
-			ColEmptyBuilder prevCol = coachsSection.addColEmpty("col-lg-2");
+			RowBuilder row = null;
+
+			//1 -> col-sm-4 col-lg-4 | col-12 col-sm-4 col-lg-4
+			//2 ->          col-lg-2 | col-12 col-sm-6 col-lg-4
+			//3 ->                   | col-12 col-sm-4 col-lg-4
 			
-			for (Coach coach : coachs) {
-				Map<String, String> coachi18n = i18nService.findI18nValues(coach.getName(), LangKey.en_EN);
-				Map<String, String> competencesI18n = i18nService.findI18nValues(coach.getName() + "-competence", LangKey.en_EN);
-				
-				ColCardBuilder coachCard = prevCol
-					.addColCard("col-12 col-sm-6 col-lg-4", coach.getName(), coach.getDisplayName(), coachi18n.get("coach.job.name"))
-					.withImgTop(storageService.getDownloadUrl(coach.getPhoto()));
-				
-				for (String competence : competencesI18n.values()) {
-					coachCard.addElement(competence);
+			for (int i = 0; i < coachs.size();) { //on n'incrémente pas i ici
+				if (i%3 == 0) {
+					row = coachsSection.row();
 				}
+				ColEmptyBuilder prevCol = null;
+				String nexColCss = null;
+				if (i+3<=coachs.size()) {
+					prevCol = row.addColEmpty("");
+					nexColCss = "col-12 col-sm-4 col-lg-4";
+				}
+				else if (i+2<=coachs.size()) {
+					prevCol = row.addColEmpty("col-lg-2");
+					nexColCss = "col-12 col-sm-6 col-lg-4";
+				}
+				else if (i+1<=coachs.size()) {
+					prevCol = row.addColEmpty("col-sm-4 col-lg-4");
+					nexColCss = "col-12 col-sm-4 col-lg-4";
+				}
+				for (int j = 0; j < 3 && i < coachs.size(); j++,i++) {
+					Coach coach = coachs.get(i);
+					
+					Map<String, String> coachi18n = i18nService.findI18nValues(coach.getName(), LangKey.en_EN);
+					Map<String, String> competencesI18n = i18nService.findI18nValues(coach.getName() + "-competence", LangKey.en_EN);
+					
+					ColCardBuilder coachCard = prevCol
+							.addColCard(nexColCss, coach.getName(), coach.getDisplayName(), coachi18n.get("coach.job.name"));
+					
+					if (coach.getPhoto() != null)
+							coachCard.withImgTop(storageService.getDownloadUrl(coach.getPhoto()));
+					
+					for (String competence : competencesI18n.values()) {
+						coachCard.addElement(competence);
+					}
+				}
+				
 			}
-			
-					.addColCard("col-12 col-sm-6 col-lg-4", "benoit", "Benoit Jacquemin", "Head Coach Crossfit Nancy")
-						.withImgTop("static/images/benoit.jpg")
-						.addElement("CrossFit Level 2 Trainer (CF-L2)")
-						.addElement("Competitor Certificate (2017)")
-						.addElement("Judge 2016 Certificate (2016)")
-						.addElement("Judges Certificate (2017)")
-						.addElement("Scaling Certificate (2016)")
-						.addElement("Spot The Flaw Certificate (1)")
-						.addElement("bpjeps agff 2014")
-					.addColCard("col-12 col-sm-6 col-lg-4", "kevin", "Kevin Bouly", "Haltérophile français")
-						.withImgTop("static/images/kevin.jpg")
-						.addElement("8 fois champion de France")
-						.addElement("Champion du Monde Masters")
-						.addElement("12ème Jeux Olympiques");
 
 		}
 					

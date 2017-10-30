@@ -57,6 +57,7 @@
         
 
       <div class="form-group">
+        <button type="button" class="btn btn-danger" (click)="delete()">Supprimer</button>
         <div class="float-right">
           <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
           <submit-button [status]="status" [disabled]="!coachForm.form.valid" value="Valider"></submit-button>

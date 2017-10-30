@@ -51,7 +51,7 @@ public class CoachService {
 		return coachRepository.findAll(query);
 	}
 	public List<Coach> findAllForWebSite() {
-		return findAll("").stream().map(withI18nFields()).collect(Collectors.toList());
+		return findAll("%").stream().map(withI18nFields()).collect(Collectors.toList());
 	}
 
 	public Optional<Coach> findOne(Long id) {

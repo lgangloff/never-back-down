@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Location} from '@angular/common';
 import {CoachService} from '../services/coach.service';
 import {Coach} from '../domain/coach.model';
+import { File } from '../../shared/domain/file.model'
 
 @Component({
   selector: 'app-coach-detail',
@@ -31,6 +32,9 @@ export class CoachDetailComponent implements OnInit {
     else{
       this.service.get(id).subscribe(c=>{
           this.coach = c;
+          if (this.coach.photo == null){
+        	  this.coach.photo = new File();
+          }
         },
         err=>{
           this.router.navigate(["coach"]);

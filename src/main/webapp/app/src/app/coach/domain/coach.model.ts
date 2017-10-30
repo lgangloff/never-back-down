@@ -9,7 +9,6 @@ export class Coach{
 
     photo: File  = new File();
     
-
     i18nFields: Map<String, I18nValue[]>;
     competenceI18nFields: Map<String, I18nValue[]>;
 
