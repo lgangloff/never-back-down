@@ -5,7 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.lgangloff.nbd.domain.WebSiteConfig;
-import org.lgangloff.nbd.service.I18nService;
+import org.lgangloff.nbd.i18n.service.I18nService;
 import org.lgangloff.nbd.service.WebSiteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class WebSiteResource {
 	@RequestMapping(value = "/website", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<WebSiteConfig> getWebSite() {
 		return Optional.ofNullable(webSiteService.getWebSiteConfig()).map(web -> {
-				web.setI18nFields(i18nService.findI18nValues(web.getName()));
+				web.setI18nFields(i18nService.findI18nValues(web));
 				return new ResponseEntity<>(web, HttpStatus.OK);
 			})
 			.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

@@ -8,9 +8,9 @@ import org.lgangloff.nbd.domain.Coach;
 import org.lgangloff.nbd.domain.Program;
 import org.lgangloff.nbd.domain.WebSiteConfig;
 import org.lgangloff.nbd.domain.front.WebSite;
-import org.lgangloff.nbd.domain.i18n.enumeration.LangKey;
+import org.lgangloff.nbd.i18n.domain.enumeration.LangKey;
+import org.lgangloff.nbd.i18n.service.I18nService;
 import org.lgangloff.nbd.service.CoachService;
-import org.lgangloff.nbd.service.I18nService;
 import org.lgangloff.nbd.service.ProgramService;
 import org.lgangloff.nbd.service.StorageService;
 import org.lgangloff.nbd.service.WebSiteBuilder;
@@ -44,7 +44,7 @@ public class IndexController {
 	public String index(Model model) {
 		
 		WebSiteConfig webSiteConfig = webSiteService.getWebSiteConfig();
-		Map<String, String> i18n = i18nService.findI18nValues(webSiteConfig.getName(), LangKey.en_EN);
+		Map<String, String> i18n = i18nService.findI18nValues(webSiteConfig, LangKey.en_EN);
 		List<Coach> coachs = coachService.findAllForWebSite();
 		List<Program> programs = programService.findAllForWebSite();
 		
@@ -58,8 +58,8 @@ public class IndexController {
 		
 		buildSection(builder, coachs, "coachs", i18n.get("website.section.title.coachs"), (prevCol, nexColCss, coach)->{
 			
-			Map<String, String> coachi18n = i18nService.findI18nValues(coach.getName(), LangKey.en_EN);
-			Map<String, String> competencesI18n = i18nService.findI18nValues(coach.getName() + "-competence", LangKey.en_EN);
+			Map<String, String> coachi18n = i18nService.findI18nValues(coach, LangKey.en_EN);
+			Map<String, String> competencesI18n = i18nService.findI18nValues(coach.getI18nCompetenceGroupKey(), LangKey.en_EN);
 			
 			ColCardBuilder coachCard = prevCol
 					.addColCard(nexColCss, coach.getName(), coach.getDisplayName(), coachi18n.get("coach.job.name"));
@@ -75,7 +75,7 @@ public class IndexController {
 
 		buildSection(builder, programs, "programs", i18n.get("website.section.title.programs"), (prevCol, nexColCss, program)->{
 
-			Map<String, String>programi18n = i18nService.findI18nValues(program.getName(), LangKey.en_EN);
+			Map<String, String>programi18n = i18nService.findI18nValues(program, LangKey.en_EN);
 			
 			prevCol
 					.addColCard(nexColCss, program.getName(), programi18n.get("program.title"), programi18n.get("program.description"))

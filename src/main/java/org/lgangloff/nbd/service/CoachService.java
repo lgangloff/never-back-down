@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import org.lgangloff.nbd.domain.Coach;
+import org.lgangloff.nbd.i18n.service.I18nService;
 import org.lgangloff.nbd.repository.CoachRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,10 +36,10 @@ public class CoachService {
 		storageService.markAsUsed(coach.getPhoto());
 
 		if (coach.getI18nFields() != null)
-			i18nService.saveI18nValues(coach.getI18nFields(), coach.getName());
+			i18nService.saveI18nValues(coach.getI18nFields(), coach);
 
 		if (coach.getCompetenceI18nFields() != null) {
-			i18nService.saveI18nValues(coach.getCompetenceI18nFields(), coach.getName() + "-competence");
+			i18nService.saveI18nValues(coach.getCompetenceI18nFields(), coach.getI18nCompetenceGroupKey());
 		}
 			
 		coachRepository.save(coach);
@@ -60,8 +61,8 @@ public class CoachService {
 
 	private Function<? super Coach, ? extends Coach> withI18nFields() {
 		return c->{
-			c.setI18nFields(i18nService.findI18nValues(c.getName()));
-			c.setCompetenceI18nFields(i18nService.findI18nValues(c.getName() + "-competence"));
+			c.setI18nFields(i18nService.findI18nValues(c));
+			c.setCompetenceI18nFields(i18nService.findI18nValues(c.getI18nCompetenceGroupKey()));
 			return c;
 		};
 	}
@@ -72,8 +73,8 @@ public class CoachService {
 			return;
 		}
 		Coach coach = optCoach.get();
-		i18nService.deleteByGroupName(coach.getName());
-		i18nService.deleteByGroupName(coach.getName()+ "-competence");
+		i18nService.deleteByGroupName(coach);
+		i18nService.deleteByGroupName(coach.getI18nCompetenceGroupKey());
 		if (coach.getPhoto() != null)
 			storageService.deleteFile(coach.getPhoto().getId());
 		coachRepository.deleteById(id);

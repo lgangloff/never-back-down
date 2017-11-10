@@ -18,12 +18,13 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.lgangloff.nbd.domain.i18n.I18nValue;
+import org.lgangloff.nbd.i18n.domain.I18nGroupNameKey;
+import org.lgangloff.nbd.i18n.domain.I18nValue;
 
 @Entity
 @Table(name = "coach")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Coach extends AbstractAuditingEntity{
+public class Coach extends AbstractAuditingEntity implements  I18nGroupNameKey{
 
 	@Id
     @GeneratedValue(generator = "coach_seq")
@@ -56,6 +57,13 @@ public class Coach extends AbstractAuditingEntity{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+	
+	@Override
+	public String getI18nGroupName() {
+		return getName();
 	}
 
 	public String getName() {
@@ -96,6 +104,10 @@ public class Coach extends AbstractAuditingEntity{
 
 	public void setCompetenceI18nFields(Map<String, List<I18nValue>> competenceI18nFields) {
 		this.competenceI18nFields = competenceI18nFields;
+	}
+
+	public I18nGroupNameKey getI18nCompetenceGroupKey() {
+		return ()->name + "-competence";
 	}
     
     

@@ -17,12 +17,13 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.lgangloff.nbd.domain.i18n.I18nValue;
+import org.lgangloff.nbd.i18n.domain.I18nGroupNameKey;
+import org.lgangloff.nbd.i18n.domain.I18nValue;
 
 @Entity
 @Table(name = "web_site_config")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class WebSiteConfig extends AbstractAuditingEntity{
+public class WebSiteConfig extends AbstractAuditingEntity implements I18nGroupNameKey{
 
 	@Id
     @GeneratedValue(generator = "web_site_config_seq")
@@ -73,6 +74,11 @@ public class WebSiteConfig extends AbstractAuditingEntity{
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	@Override
+	public String getI18nGroupName() {
+		return name;
 	}
 	public String getName() {
 		return name;

@@ -8,6 +8,7 @@ import java.util.function.Function;
 import org.apache.commons.lang3.StringUtils;
 import org.lgangloff.nbd.domain.Program;
 import org.lgangloff.nbd.exception.FieldRequiredException;
+import org.lgangloff.nbd.i18n.service.I18nService;
 import org.lgangloff.nbd.repository.ProgramRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class ProgramService {
 		}
 
 		if (p.getI18nFields() != null)
-			i18nService.saveI18nValues(p.getI18nFields(), p.getName());
+			i18nService.saveI18nValues(p.getI18nFields(), p);
 
 		Program program = programRepository.save(p);
 		
@@ -53,7 +54,7 @@ public class ProgramService {
 
 	private Function<? super Program, ? extends Program> withI18nFields() {
 		return p->{
-			p.setI18nFields(i18nService.findI18nValues(p.getName()));
+			p.setI18nFields(i18nService.findI18nValues(p));
 			return p;
 		};
 	}
@@ -64,7 +65,7 @@ public class ProgramService {
 			return;
 		}
 		Program program = optProgram.get();
-		i18nService.deleteByGroupName(program.getName());
+		i18nService.deleteByGroupName(program);
 		programRepository.deleteById(id);
 	}
 

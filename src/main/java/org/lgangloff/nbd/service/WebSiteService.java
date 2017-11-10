@@ -2,6 +2,7 @@ package org.lgangloff.nbd.service;
 
 import org.lgangloff.nbd.config.Constants;
 import org.lgangloff.nbd.domain.WebSiteConfig;
+import org.lgangloff.nbd.i18n.service.I18nService;
 import org.lgangloff.nbd.repository.WebSiteConfigRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class WebSiteService {
 		storageService.markAsUsed(config.getLogo500ImageFile());
 		storageService.markAsUsed(config.getLogo300ImageFile());
 		
-		i18nService.saveI18nValues(config.getI18nFields(), config.getName());
+		i18nService.saveI18nValues(config.getI18nFields(), config);
 		
 		webSiteConfigRepository.save(config);
 	}
