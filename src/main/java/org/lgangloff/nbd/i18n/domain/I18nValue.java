@@ -1,4 +1,4 @@
-package org.lgangloff.nbd.domain.i18n;
+package org.lgangloff.nbd.i18n.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.lgangloff.nbd.domain.AbstractAuditingEntity;
-import org.lgangloff.nbd.domain.i18n.enumeration.LangKey;
+import org.lgangloff.nbd.i18n.domain.enumeration.LangKey;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

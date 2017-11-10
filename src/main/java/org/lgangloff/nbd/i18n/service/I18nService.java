@@ -1,14 +1,15 @@
-package org.lgangloff.nbd.service;
+package org.lgangloff.nbd.i18n.service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import org.lgangloff.nbd.domain.i18n.I18nKey;
-import org.lgangloff.nbd.domain.i18n.I18nValue;
-import org.lgangloff.nbd.domain.i18n.enumeration.LangKey;
-import org.lgangloff.nbd.repository.I18nRepository;
+import org.lgangloff.nbd.i18n.domain.I18nGroupNameKey;
+import org.lgangloff.nbd.i18n.domain.I18nKey;
+import org.lgangloff.nbd.i18n.domain.I18nValue;
+import org.lgangloff.nbd.i18n.domain.enumeration.LangKey;
+import org.lgangloff.nbd.i18n.repository.I18nRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,24 @@ public class I18nService {
 	private I18nRepository i18nRepository;
 	
 	
-	public Map<String, String> findI18nValues(String groupName, LangKey lang){
+	public Map<String, String> findI18nValues(I18nGroupNameKey groupName, LangKey lang){
 		return i18nRepository.findAllByGroupName(groupName, lang).stream().collect(Collectors.toMap(v->v.getI18nKey().getName(), v->v.getValue() == null ? "" : v.getValue()));
 	}
 
 
-	public Map<String, List<I18nValue>> findI18nValues(String groupName) {
+	public Map<String, List<I18nValue>> findI18nValues(I18nGroupNameKey groupName) {
 		return i18nRepository.findAllByGroupName(groupName)
 					.stream().collect(
 							Collectors.groupingBy(v->v.getI18nKey().getName()));
 	}
 
 
-	public void saveI18nValues(Map<String, List<I18nValue>> i18nFields, String groupName) {
+	public void saveI18nValues(Map<String, List<I18nValue>> i18nFields, I18nGroupNameKey groupName) {
 		
 		Map<I18nKey, List<I18nValue>> keys = i18nRepository.findAllByGroupName(groupName).stream().collect(Collectors.groupingBy(I18nValue::getI18nKey));
 		
 		for (Entry<String, List<I18nValue>> entry: i18nFields.entrySet()) {			
-			I18nKey i18nKey = keys.keySet().stream().filter(k->k.getName().equals(entry.getKey())).findFirst().orElse(new I18nKey(entry.getKey(), groupName));
+			I18nKey i18nKey = keys.keySet().stream().filter(k->k.getName().equals(entry.getKey())).findFirst().orElse(new I18nKey(entry.getKey(), groupName.getI18nGroupName()));
 			keys.remove(i18nKey);
 			for (I18nValue value : entry.getValue()) {
 				value.setI18nKey(i18nKey);
@@ -56,7 +57,7 @@ public class I18nService {
 	}
 
 
-	public void deleteByGroupName(String groupName) {
+	public void deleteByGroupName(I18nGroupNameKey groupName) {
 		i18nRepository.deleteValuesByGroupName(groupName);
 		i18nRepository.deleteKeyByGroupName(groupName);
 	}

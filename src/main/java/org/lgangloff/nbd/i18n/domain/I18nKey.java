@@ -1,4 +1,4 @@
-package org.lgangloff.nbd.domain.i18n;
+package org.lgangloff.nbd.i18n.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
